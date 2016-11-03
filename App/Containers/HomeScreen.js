@@ -1,34 +1,34 @@
-import React from 'react'
-import { ScrollView, Text, KeyboardAvoidingView, Animated, Image, View, Easing } from 'react-native'
-import { connect } from 'react-redux'
-import RoundedButton from '../Components/RoundedButton'
+import React from 'react';
+
+import {
+  Text,
+  KeyboardAvoidingView,
+  Animated,
+  View,
+  Easing,
+  Alert,
+  Image,
+  NativeModules,
+} from 'react-native';
+import { connect } from 'react-redux';
+import RoundedButton from '../Components/RoundedButton';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-import { Metrics } from '../Themes'
 // external libs
-import Icon from 'react-native-vector-icons/FontAwesome'
-import Animatable from 'react-native-animatable'
-import { Actions as NavigationActions } from 'react-native-router-flux'
-import { Images } from '../Themes'
+import { Actions as NavigationActions } from 'react-native-router-flux';
+import { Images } from '../Themes';
 
 // Styles
-import styles from './Styles/HomeScreenStyle'
+import styles from './Styles/HomeScreenStyle';
 
 class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props);
-
+  constructor() {
+    super();
     this.state = {
       loggedIn: false,
     };
-
-    this.slideValue = new Animated.Value(0)
-
+    this.slideValue = new Animated.Value(0);
     this.loginButtonPressed = this.loginButtonPressed.bind(this);
-  }
-
-  componentDidMount() {
-    this.slide()
   }
 
   get slideLeft() {
@@ -45,77 +45,147 @@ class HomeScreen extends React.Component {
     });
   }
 
-  slide () {
-    this.slideValue.setValue(0)
+  get opacity() {
+    return this.slideValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 0.3],
+    });
+  }
+
+  slideForward() {
+    this.slideValue.setValue(0);
     Animated.timing(
       this.slideValue,
       {
         toValue: 1,
         duration: 1000,
-        easing: Easing.linear
+        easing: Easing.easeInOut,
       }
-    ).start()
+    ).start();
   }
 
-  loginButtonPressed () {
-    this.state.loggedIn = !this.state.loggedIn;
-    console.log(this.state.loggedIn);
+  slideBack() {
+    this.slideValue.setValue(1);
+    Animated.timing(
+      this.slideValue,
+      {
+        toValue: 0,
+        duration: 1000,
+        easing: Easing.easeInOut,
+      }
+    ).start();
   }
 
-  render () {
+  loginButtonPressed() {
+    const neuraSDKManager = NativeModules.NeuraSDKReact;
+
+    if (this.state.loggedIn === false) {
+      neuraSDKManager.authenticateWithPermissions((token, error) => {
+        if (error === null) {
+          this.slideForward();
+          this.setState({
+            loggedIn: true,
+          });
+        } else {
+          console.warn('there was an error', error);
+        }
+      });
+    } else {
+      console.warn('logging out');
+      this.setState({
+        loggedIn: false,
+      });
+    }
+  }
+
+  userNotLoggedIn() {
+    Alert.alert(
+    'Error',
+    'You must be logged in to access this functionality.',
+      [
+        { text: 'OK', onPress: () => console.warn('OK Pressed') },
+      ]
+  );
+  }
+  approvedPermissionsList() {
+    console.log('approvedPermissionsList');
+  }
+
+  render() {
     return (
       <View
         style={{
-          marginTop: 50
+          marginTop: 80,
         }}
       >
-        <KeyboardAvoidingView behavior='position'>
-          <Text>HomeScreen Container</Text>
+        <KeyboardAvoidingView behavior="position">
+          <View style={styles.centered}>
+            <Image source={Images.neuraSdkDemoLogo} style={styles.sdklogo} />
+            <Text style={{ marginBottom: 20 }}>React Native</Text>
+            <Animated.Image
+              source={Images.neuraSymbolTopElement}
+              className={styles.logo}
+              style={{
+                marginLeft: this.slideLeft,
+                opacity: this.opacity,
+              }}
+            />
+            <Animated.Image
+              source={Images.neuraSymbolBottomElement}
+              className={styles.logo}
+              style={{
+                marginLeft: this.slideRight,
+                opacity: this.opacity,
+                marginBottom: 20,
+              }}
+            />
+            <Text>
+              Neura Status:
+            </Text>
+            {this.state.loggedIn ?
+              <Text style={{ color: 'green' }}>
+                Connected
+              </Text>
+              : <Text style={{ color: 'red' }}>
+                Disconnected
+              </Text>
+            }
+          </View>
+          <RoundedButton onPress={this.loginButtonPressed}>
+            Connect and Request Permissions
+          </RoundedButton>
+          <RoundedButton onPress={this.state.loggedIn ? this.approvedPermissionsList : this.userNotLoggedIn}>
+            Approved Permissions List
+          </RoundedButton>
+          {this.state.loggedIn ?
+            <RoundedButton onPress={NavigationActions.permissionsList}>
+              Edit Subscriptions
+            </RoundedButton>
+            : <RoundedButton onPress={NavigationActions.permissionsList}>
+              Permissions List
+            </RoundedButton>
+          }
+
+          <RoundedButton onPress={this.state.loggedIn ? NavigationActions.permissionsList : this.userNotLoggedIn}>
+            Devices
+          </RoundedButton>
+          <RoundedButton onPress={NavigationActions.componentExamples}>
+            Send Log
+          </RoundedButton>
         </KeyboardAvoidingView>
-        <View style={styles.centered}>
-          <Animated.Image
-            source={Images.neuraSymbolTopElement}
-            className={styles.logo}
-            style={{
-              marginLeft: this.slideLeft,
-            }}
-          />
-          <Animated.Image
-            source={Images.neuraSymbolBottomElement}
-            className={styles.logo}
-            style={{
-              marginLeft: this.slideRight,
-            }}
-          />
-        </View>
-        <RoundedButton onPress={this.loginButtonPressed}>
-          Connect and Request Permissions
-        </RoundedButton>
-        <RoundedButton onPress={NavigationActions.componentExamples}>
-          Approved Permissions
-        </RoundedButton>
-        <RoundedButton onPress={NavigationActions.componentExamples}>
-          Permissions List
-        </RoundedButton>
-        <RoundedButton onPress={NavigationActions.componentExamples}>
-          Devices
-        </RoundedButton>
-        <RoundedButton onPress={NavigationActions.componentExamples}>
-          Send Log
-        </RoundedButton>
       </View>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

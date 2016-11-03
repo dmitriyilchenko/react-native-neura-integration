@@ -9,6 +9,10 @@ export default StyleSheet.create({
     width: Metrics.images.logo,
     resizeMode: 'contain',
   },
+  sdklogo: {
+    width: Metrics.images.logo,
+    resizeMode: 'contain',
+  },
   centered: {
     alignItems: 'center',
   },
