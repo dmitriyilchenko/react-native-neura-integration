@@ -25,10 +25,15 @@ class HomeScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false,
+      loggedIn: true,
     };
     this.slideValue = new Animated.Value(0);
     this.loginButtonPressed = this.loginButtonPressed.bind(this);
+    this.logoutButtonPressed = this.logoutButtonPressed.bind(this);
+  }
+
+  componentDidMount() {
+    this.state.loggedIn ? this.slideForward() : this.slideBack();
   }
 
   get slideLeft() {
