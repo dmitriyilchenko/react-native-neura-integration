@@ -58,18 +58,6 @@ class HomeScreen extends React.Component {
   }
 
   slideForward() {
-    this.slideValue.setValue(0);
-    Animated.timing(
-      this.slideValue,
-      {
-        toValue: 1,
-        duration: 1000,
-        easing: Easing.easeInOut,
-      }
-    ).start();
-  }
-
-  slideBack() {
     this.slideValue.setValue(1);
     Animated.timing(
       this.slideValue,
@@ -81,26 +69,41 @@ class HomeScreen extends React.Component {
     ).start();
   }
 
+  slideBack() {
+    this.slideValue.setValue(0);
+    Animated.timing(
+      this.slideValue,
+      {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.easeInOut,
+      }
+    ).start();
+  }
+
   loginButtonPressed() {
     const neuraSDKManager = NativeModules.NeuraSDKReact;
 
-    if (this.state.loggedIn === false) {
-      neuraSDKManager.authenticateWithPermissions((token, error) => {
-        if (error === null) {
-          this.slideForward();
-          this.setState({
-            loggedIn: true,
-          });
-        } else {
-          console.warn('there was an error', error);
-        }
-      });
-    } else {
-      console.warn('logging out');
-      this.setState({
-        loggedIn: false,
-      });
-    }
+    neuraSDKManager.authenticateWithPermissions((token, error) => {
+      if (error === null) {
+        this.slideForward();
+        this.setState({
+          loggedIn: true,
+        });
+      } else {
+        console.warn('there was an error', error);
+      }
+    });
+  }
+
+  logoutButtonPressed() {
+    const neuraSDKManager = NativeModules.NeuraSDKReact;
+
+    neuraSDKManager.logout();
+    console.warn('logging out');
+    this.setState({
+      loggedIn: false,
+    });
   }
 
   userNotLoggedIn() {
@@ -113,7 +116,8 @@ class HomeScreen extends React.Component {
   );
   }
   approvedPermissionsList() {
-    console.log('approvedPermissionsList');
+    const neuraSDKManager = NativeModules.NeuraSDKReact;
+    neuraSDKManager.openNeuraSettingsPanel();
   }
 
   render() {
@@ -156,21 +160,26 @@ class HomeScreen extends React.Component {
               </Text>
             }
           </View>
-          <RoundedButton onPress={this.loginButtonPressed}>
-            Connect and Request Permissions
-          </RoundedButton>
+          {
+            this.state.loggedIn ?
+              <RoundedButton onPress={this.logoutButtonPressed}>
+                Disconnect
+              </RoundedButton>
+              : <RoundedButton onPress={this.loginButtonPressed}>
+                Connect and Request Permissions
+              </RoundedButton>
+          }
           <RoundedButton onPress={this.state.loggedIn ? this.approvedPermissionsList : this.userNotLoggedIn}>
             Approved Permissions List
           </RoundedButton>
           {this.state.loggedIn ?
-            <RoundedButton onPress={NavigationActions.permissionsList}>
+            <RoundedButton onPress={NavigationActions.subscriptionsList}>
               Edit Subscriptions
             </RoundedButton>
             : <RoundedButton onPress={NavigationActions.permissionsList}>
               Permissions List
             </RoundedButton>
           }
-
           <RoundedButton onPress={this.state.loggedIn ? NavigationActions.permissionsList : this.userNotLoggedIn}>
             Devices
           </RoundedButton>
