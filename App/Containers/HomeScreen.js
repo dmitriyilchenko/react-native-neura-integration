@@ -180,7 +180,7 @@ class HomeScreen extends React.Component {
               Permissions List
             </RoundedButton>
           }
-          <RoundedButton onPress={this.state.loggedIn ? NavigationActions.permissionsList : this.userNotLoggedIn}>
+          <RoundedButton onPress={this.state.loggedIn ? NavigationActions.devicesScreen : this.userNotLoggedIn}>
             Devices
           </RoundedButton>
           <RoundedButton onPress={NavigationActions.componentExamples}>
