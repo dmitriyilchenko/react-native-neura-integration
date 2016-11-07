@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
-import { Actions as NavigationActions } from 'react-native-router-flux';
+// import { Actions as NavigationActions } from 'react-native-router-flux';
 
 // Styles
 import styles from './Styles/SubscriptionsListViewStyle';
@@ -31,9 +31,7 @@ class SubscriptionsListScreen extends React.Component {
   }
 
   getSubscriptions() {
-    const neuraSDKManager = this.neuraSDKManager;
-
-    neuraSDKManager.getSubscriptions((subscriptionsArray, subscriptionsError) => {
+    this.neuraSDKManager.getSubscriptions((subscriptionsArray, subscriptionsError) => {
       if (subscriptionsError !== null) {
         Alert.alert(
           'Error',
@@ -44,7 +42,7 @@ class SubscriptionsListScreen extends React.Component {
         );
         return;
       }
-      neuraSDKManager.getPermissions((permissionsArray, permissionsError) => {
+      this.neuraSDKManager.getPermissions((permissionsArray, permissionsError) => {
         if (permissionsError !== null) {
           Alert.alert(
             'Error',
@@ -172,6 +170,7 @@ class SubscriptionsListScreen extends React.Component {
           contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
+          enableEmptySections
           pageSize={15}
         />
       </View>
