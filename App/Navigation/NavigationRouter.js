@@ -20,6 +20,8 @@ import DeviceInfoScreen from '../Containers/DeviceInfoScreen';
 import HomeScreen from '../Containers/HomeScreen';
 import PermissionsList from '../Containers/PermissionsList';
 import SubscriptionsList from '../Containers/SubscriptionsListScreen';
+import DevicesScreen from '../Containers/DevicesScreen';
+import CapabilitiesList from '../Containers/CapabilitiesList';
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -44,6 +46,8 @@ class NavigationRouter extends Component {
             <Scene key="homeScreen" component={HomeScreen} title="Home Screen" />
             <Scene key="permissionsList" component={PermissionsList} title="Permissions List" />
             <Scene key="subscriptionsList" component={SubscriptionsList} title="Subscriptions List" />
+            <Scene key="devicesScreen" component={DevicesScreen} title="Devices" />
+            <Scene key="capabilitiesList" component={CapabilitiesList} title="Capabilities List" />
           </Scene>
         </Scene>
       </Router>
