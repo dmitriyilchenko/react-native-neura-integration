@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">neuraReactNativeiOS</string>
+
+    <string name="app_uid">6a1bb57d2f2f6fe47c5e83fb8eb59f21dbc3f935a30d23de3921f9f42d8d07ab</string>
+    <string name="app_secret">7fd3608dc5ce7e298b565c5e226b8939333fbd525a9125b08c7968bcadb854bf</string>
+
 </resources>

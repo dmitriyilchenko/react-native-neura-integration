@@ -1,6 +1,8 @@
 package com.neurareactnativeios;
 
+import android.os.Bundle;
 import com.facebook.react.ReactActivity;
+import com.neurareactnativeios.controller.NeuraSDKManagerPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -11,5 +13,21 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "neuraReactNativeiOS";
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        mReactRootView = new ReactRootView(this);
+//        mReactInstanceManager = ReactInstanceManager.builder()
+//                .setApplication(getApplication())
+//                .setBundleAssetName("index.android.bundle")
+//                .setJSMainModuleName("index.android")
+//                .addPackage(new NeuraControllerPackage())
+//                .setUseDeveloperSupport(BuildConfig.DEBUG)
+//                .setInitialLifecycleState(LifecycleState.RESUMED)
+//                .build();
+//        mReactRootView.startReactApplication(mReactInstanceManager, "NeuraSampleReact", null);
+//        setContentView(mReactRootView);
     }
 }
