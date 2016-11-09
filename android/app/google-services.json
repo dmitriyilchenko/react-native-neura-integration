@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "469351886216",
+    "firebase_url": "https://neurasamplereact-90d37.firebaseio.com",
+    "project_id": "neurasamplereact-90d37",
+    "storage_bucket": "neurasamplereact-90d37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469351886216:android:47d0f25b27e3621d",
+        "android_client_info": {
+          "package_name": "com.neurareactnativeios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469351886216-21335l4tktqc7ihfbi03g9k9hp2m2gph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neurareactnativeios",
+            "certificate_hash": "6B75009C57AFF3168D005F5618998BB5C60093F5"
+          }
+        },
+        {
+          "client_id": "469351886216-15vq9sms1go4kb6bd4pp3gpasdovnijn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI2erWbblIfwCJTl6U1eUHOHv5djp4p1U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469351886216-15vq9sms1go4kb6bd4pp3gpasdovnijn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
