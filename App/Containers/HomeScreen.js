@@ -27,9 +27,11 @@ class HomeScreen extends React.Component {
     this.state = {
       loggedIn: true,
     };
+    this.neuraSDKManager = NativeModules.NeuraSDKReact;
     this.slideValue = new Animated.Value(0);
     this.loginButtonPressed = this.loginButtonPressed.bind(this);
     this.logoutButtonPressed = this.logoutButtonPressed.bind(this);
+    this.approvedPermissionsList = this.approvedPermissionsList.bind(this);
   }
 
   componentDidMount() {
@@ -82,25 +84,20 @@ class HomeScreen extends React.Component {
   }
 
   loginButtonPressed() {
-    const neuraSDKManager = NativeModules.NeuraSDKReact;
-
-    neuraSDKManager.authenticateWithPermissions((token, error) => {
+    this.neuraSDKManager.authenticateWithPermissions((token, error) => {
       if (error === null) {
         this.slideForward();
         this.setState({
           loggedIn: true,
         });
       } else {
-        console.warn('there was an error', error);
+        console.warn('There was an error', error);
       }
     });
   }
 
   logoutButtonPressed() {
-    const neuraSDKManager = NativeModules.NeuraSDKReact;
-
-    neuraSDKManager.logout();
-    console.warn('logging out');
+    this.neuraSDKManager.logout();
     this.setState({
       loggedIn: false,
     });
@@ -116,8 +113,7 @@ class HomeScreen extends React.Component {
   );
   }
   approvedPermissionsList() {
-    const neuraSDKManager = NativeModules.NeuraSDKReact;
-    neuraSDKManager.openNeuraSettingsPanel();
+    this.neuraSDKManager.openNeuraSettingsPanel();
   }
 
   render() {
@@ -183,7 +179,7 @@ class HomeScreen extends React.Component {
           <RoundedButton onPress={this.state.loggedIn ? NavigationActions.devicesScreen : this.userNotLoggedIn}>
             Devices
           </RoundedButton>
-          <RoundedButton onPress={NavigationActions.componentExamples}>
+          <RoundedButton onPress={this.neuraSDKManager.sendLog}>
             Send Log
           </RoundedButton>
         </KeyboardAvoidingView>
