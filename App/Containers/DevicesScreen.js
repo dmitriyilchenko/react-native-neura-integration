@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, ActionSheetIOS, Alert, NativeModules } from 'react-native';
+import { View, ActionSheetIOS, Alert } from 'react-native';
 import { connect } from 'react-redux';
+import NeuraSDK from '../Lib/NeuraSDKManager';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 // import { Metrics } from '../Themes';
 import RoundedButton from '../Components/RoundedButton';
+import UserCapabilitiesPicker from '../Components/UserCapabilitiesPicker';
 // external libs
 // import Icon from 'react-native-vector-icons/FontAwesome';
 // import Animatable from 'react-native-animatable';
@@ -22,10 +24,12 @@ class DevicesScreen extends React.Component {
   constructor(props) {
     super(props);
     this.CANCEL_INDEX = 3;
-    this.neuraSDKManager = NativeModules.NeuraSDKReact;
     this.state = {
       actionSheetOptions: ['Show all', 'Add by capability', 'Add by device name', 'Cancel'],
+      showPicker: false,
     };
+    this.showAddDeviceActionSheet = this.showAddDeviceActionSheet.bind(this);
+    this.hidePicker = this.hidePicker.bind(this);
   }
 
   addDevice(buttonIndex) {
@@ -43,7 +47,7 @@ class DevicesScreen extends React.Component {
       default:
         return;
     }
-    this.neuraSDKManager.addDeviceWithCapability(capabilityName, deviceName, (response, error) => {
+    NeuraSDK.addDeviceWithCapability(capabilityName, deviceName, (response, error) => {
       if (error) {
         Alert.alert(
           'Error',
@@ -67,21 +71,43 @@ class DevicesScreen extends React.Component {
     });
   }
 
+
+  hidePicker() {
+    this.setState({
+      showPicker: false,
+    });
+  }
+
+  showPicker() {
+    this.setState({
+      showPicker: true,
+    });
+  }
+
   render() {
     return (
       <View style={{ marginTop: 80 }}>
         <RoundedButton onPress={NavigationActions.capabilitiesList}>
           Get All Capabilities
         </RoundedButton>
-        <RoundedButton onPress={console.warn('users capabilities')}>
+        <RoundedButton
+          onPress={this.showPicker.bind(this)}
+        >
           Check User&#39;s Capabilities
         </RoundedButton>
-        <RoundedButton onPress={console.warn('all devices')}>
+        <RoundedButton onPress={NavigationActions.devicesList}>
           Get All Devices
         </RoundedButton>
-        <RoundedButton onPress={this.showAddDeviceActionSheet.bind(this)}>
+        <RoundedButton onPress={this.showAddDeviceActionSheet}>
           Add a Device
         </RoundedButton>
+
+        {this.state.showPicker
+          ? <UserCapabilitiesPicker
+            hidePicker={this.hidePicker}
+          />
+        : null}
+
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, PickerIOS, NativeModules, Alert } from 'react-native';
+import { View, Text, PickerIOS, NativeModules, Alert, TouchableOpacity } from 'react-native';
 import styles from './Styles/UserCapabilitiesPickerStyle';
 
 const PickerItemIOS = PickerIOS.Item;
@@ -10,20 +10,21 @@ export default class UserCapabilitiesPicker extends React.Component {
 
     this.state = {
       capabilities: [],
-      capabilityIndex: null,
+      chosenCapability: null,
     };
     this.neuraSDKManager = NativeModules.NeuraSDKReact;
     this.getSupportedCapabilities();
+    this.checkCapability = this.checkCapability.bind(this);
   }
 
   getSupportedCapabilities() {
-    this.neuraSDKManager.getSupportedCapabilitiesListWithHandler((capabilitiesArray, error) => {
+    this.neuraSDKManager.getSupportedCapabilities((capabilitiesArray, error) => {
       if (error) {
         Alert.alert(
           'Error',
           'There was an error fetching data in getSubscriptions.',
           [
-            { text: 'OK', onPress: () => console.warn('OK Pressed') },
+            { text: 'OK', onPress: () => null },
           ]
         );
         return;
@@ -34,37 +35,47 @@ export default class UserCapabilitiesPicker extends React.Component {
     });
   }
 
-  checkCapability(capability) {
-    this.neuraSDKManager.hasDeviceWithCapability(capability, (capabilityResponse, error) => {
+  checkCapability() {
+    const chosenCapability = this.state.chosenCapability;
+    this.neuraSDKManager.hasDeviceWithCapability(chosenCapability, (capabilityResponse, error) => {
       if (error) {
         Alert.alert(
           'Error',
-          'There was an error fetching data in getSubscriptions.',
+          'There was an error fetching data.',
           [
-            { text: 'OK', onPress: () => console.warn('OK Pressed') },
+            { text: 'OK', onPress: () => null },
           ]
         );
         return;
       }
-      debugger;
+      const responseText = capabilityResponse.status === 'NO' ? ("User does not have " + chosenCapability) : ("User has " + chosenCapability);
       Alert.alert(
         'Alert',
-        'The user has some capability.',
+        responseText,
         [
-          { text: 'OK', onPress: () => console.warn('OK Pressed') },
+          { text: 'OK', onPress: () => null },
         ]
       );
     });
+    this.props.hidePicker();
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>UserCapabilitiesPicker Component</Text>
+      <View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 20 }}>
+          <TouchableOpacity onPress={this.props.hidePicker}>
+            <Text style={{ color: '#00ccff' }}>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.checkCapability}>
+            <Text style={{ color: '#00ccff' }}>Check</Text>
+          </TouchableOpacity>
+        </View>
         <PickerIOS
-          selectedValue={this.state.capabilityIndex}
+          selectedValue={this.state.chosenCapability}
           key={this.state.capability}
-          onValueChange={this.checkCapability}>
+          onValueChange={(chosenCapability) => this.setState({ chosenCapability })}
+        >
           {this.state.capabilities.map((capability) => (
             <PickerItemIOS
               key={capability}
@@ -78,13 +89,6 @@ export default class UserCapabilitiesPicker extends React.Component {
   }
 }
 
-// // Prop type warnings
-// UserCapabilitiesPicker.propTypes = {
-//   someProperty: React.PropTypes.object,
-//   someSetting: React.PropTypes.bool.isRequired
-// }
-//
-// // Defaults for props
-// UserCapabilitiesPicker.defaultProps = {
-//   someSetting: false
-// }
+UserCapabilitiesPicker.propTypes = {
+  hidePicker: React.PropTypes.func,
+};
