@@ -120,7 +120,7 @@ RCT_EXPORT_METHOD(removeSubscriptionWithIdentifier:(NSString *)eventName callbac
   }];
 }
 
-RCT_EXPORT_METHOD(getSupportedCapabilitiesListWithHandler:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(getSupportedCapabilities:(RCTResponseSenderBlock)callback)
 {
   [[NeuraSDK sharedInstance] getSupportedCapabilitiesListWithHandler:^(NSDictionary *responseData, NSString *error) {
     if (error){
@@ -129,6 +129,20 @@ RCT_EXPORT_METHOD(getSupportedCapabilitiesListWithHandler:(RCTResponseSenderBloc
     }
     if (responseData) {
       NSArray *list = [responseData[@"items"] valueForKey:@"name"];
+      callback(@[list, [NSNull null]]);
+    }}];
+}
+
+
+RCT_EXPORT_METHOD(getSupportedDevices:(RCTResponseSenderBlock)callback)
+{
+  [[NeuraSDK sharedInstance] getSupportedDevicesListWithHandler:^(NSDictionary *responseData, NSString *error) {
+    if (error){
+      callback(@[[NSNull null], error]);
+      return;
+    }
+    if (responseData) {
+      NSArray *list = [responseData[@"devices"] valueForKey:@"name"];
       callback(@[list, [NSNull null]]);
     }}];
 }
@@ -176,6 +190,11 @@ RCT_EXPORT_METHOD(getUserSituationForTimeStamp:(NSDate *)timestamp contextual:(B
        callback(@[responseData, [NSNull null]]);
      }];
   });
+}
+
+RCT_EXPORT_METHOD(sendLog)
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"NeuraSdkPrivateSendLogByMailNotification" object:nil];
 }
 
 @end
