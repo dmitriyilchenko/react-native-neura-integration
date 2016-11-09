@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View, Text, ListView } from 'react-native';
+import { View, Text, ListView, NativeModules, Alert } from 'react-native';
 import { connect } from 'react-redux';
 // import { Actions as NavigationActions } from 'react-native-router-flux'
 
@@ -9,43 +9,22 @@ import AlertMessage from '../Components/AlertMessage';
 // Styles
 import styles from './Styles/CapabilitiesListStyle';
 
-class Capabilitieslist extends React.Component {
+class CapabilitiesList extends React.Component {
 
   constructor(props) {
     super(props);
-
-    // If you need scroll to bottom, consider http://bit.ly/2bMQ2BZ
-
-    /* ***********************************************************
-    * STEP 1
-    * This is an array of objects with the properties you desire
-    * Usually this should come from Redux mapStateToProps
-    *************************************************************/
-    const dataObjects = [
-      {title: 'First Title', description: 'First Description'},
-      {title: 'Second Title', description: 'Second Description'},
-      {title: 'Third Title', description: 'Third Description'},
-      {title: 'Fourth Title', description: 'Fourth Description'},
-      {title: 'Fifth Title', description: 'Fifth Description'},
-      {title: 'Sixth Title', description: 'Sixth Description'},
-      {title: 'Seventh Title', description: 'Seventh Description'}
-    ]
-
-    /* ***********************************************************
-    * STEP 2
-    * Teach datasource how to detect if rows are different
-    * Make this function fast!  Perhaps something like:
-    *   (r1, r2) => r1.id !== r2.id}
-    *************************************************************/
+    this.neuraSDKManager = NativeModules.NeuraSDKReact;
+    const dataObjects = [];
     const rowHasChanged = (r1, r2) => (r1 !== r2);
 
     // DataSource configured
-    const ds = new ListView.DataSource({ rowHasChanged });
+    this.ds = new ListView.DataSource({ rowHasChanged });
 
     // Datasource is always in state
     this.state = {
-      dataSource: ds.cloneWithRows(dataObjects),
+      dataSource: this.ds.cloneWithRows(dataObjects),
     };
+    this.fetchCapabilities();
   }
 
   /* ***********************************************************
@@ -82,11 +61,29 @@ class Capabilitieslist extends React.Component {
     return this.state.dataSource.getRowCount() === 0;
   }
 
+
+  fetchCapabilities() {
+    this.neuraSDKManager.getSupportedCapabilities((capabilitiesArray, error) => {
+      if (error) {
+        Alert.alert(
+          'Error',
+          'There was an error fetching data in fetchDevices.',
+          [
+            { text: 'OK', onPress: () => null },
+          ]
+        );
+        return;
+      }
+      this.setState({
+        dataSource: this.ds.cloneWithRows(capabilitiesArray),
+      });
+    });
+  }
+
   renderRow(rowData) {
     return (
       <View style={styles.row}>
-        <Text style={styles.boldLabel}>{rowData.title}</Text>
-        <Text style={styles.label}>{rowData.description}</Text>
+        <Text style={styles.boldLabel}>{rowData}</Text>
       </View>
     );
   }
@@ -106,24 +103,22 @@ class Capabilitieslist extends React.Component {
           contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
           renderRow={this.renderRow}
-          renderFooter={this.renderFooter}
           enableEmptySections
-          pageSize={15}
         />
       </View>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     // ...redux state to props here
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Capabilitieslist);
+export default connect(mapStateToProps, mapDispatchToProps)(CapabilitiesList);
