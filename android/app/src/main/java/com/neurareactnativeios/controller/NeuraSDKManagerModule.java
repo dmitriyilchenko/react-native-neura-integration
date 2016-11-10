@@ -56,7 +56,7 @@ public class NeuraSDKManagerModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "NeuraSDKManager";
+        return "NeuraSDKManagerAndroid";
     }
 
     @ReactMethod
