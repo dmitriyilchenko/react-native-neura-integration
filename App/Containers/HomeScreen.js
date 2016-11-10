@@ -9,6 +9,7 @@ import {
   Alert,
   Image,
   NativeModules,
+  Platform,
 } from 'react-native';
 import { connect } from 'react-redux';
 import RoundedButton from '../Components/RoundedButton';
@@ -179,9 +180,13 @@ class HomeScreen extends React.Component {
           <RoundedButton onPress={this.state.loggedIn ? NavigationActions.devicesScreen : this.userNotLoggedIn}>
             Devices
           </RoundedButton>
+          {Platform.os !== 'ios' ?
+          null
+          :
           <RoundedButton onPress={this.neuraSDKManager.sendLog}>
             Send Log
           </RoundedButton>
+        }
         </KeyboardAvoidingView>
       </View>
     );
