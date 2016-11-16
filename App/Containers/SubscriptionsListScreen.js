@@ -139,6 +139,12 @@ class SubscriptionsListScreen extends React.Component {
         }
       }));
     } else {
+      const index = this.subscriptionsArray.findIndex((item) => item.eventName === eventName);
+        // If successful, switch the boolean to false
+      this.subscriptionsArray[index].subscribed = false;
+      this.setState({
+        dataSource: this.ds.cloneWithRows(this.subscriptionsArray),
+      });
       this.removeSubscription(eventName);
     }
   }
