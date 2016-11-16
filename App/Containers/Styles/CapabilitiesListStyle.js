@@ -10,22 +10,23 @@ export default StyleSheet.create({
   },
   row: {
     flex: 1,
-    backgroundColor: Colors.fire,
+    backgroundColor: '#F6F6F6',
     marginVertical: Metrics.smallMargin,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: 50,
   },
   boldLabel: {
     fontWeight: 'bold',
     alignSelf: 'center',
-    color: Colors.snow,
+    color: Colors.black,
     textAlign: 'center',
-    marginBottom: Metrics.smallMargin
+    marginBottom: Metrics.smallMargin,
   },
   label: {
     textAlign: 'center',
-    color: Colors.snow
+    color: Colors.snow,
   },
   listContent: {
-    marginTop: Metrics.baseMargin
-  }
-})
+    marginTop: Metrics.baseMargin,
+  },
+});
