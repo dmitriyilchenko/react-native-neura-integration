@@ -19,31 +19,30 @@ class SubscriptionsListScreen extends React.Component {
       dataSource: this.ds.cloneWithRows([]),
     };
     this.subscriptionsArray = null;
-    this.neuraSDKManager = NativeModules.NeuraSDKReact;
     this.getSubscriptions();
     this.subscribeToEvent.bind(this);
     this.renderRow = this.renderRow.bind(this);
   }
 
   getSubscriptions() {
-    this.neuraSDKManager.getSubscriptions((subscriptionsArray, subscriptionsError) => {
+    NeuraSDKManager.getSubscriptions((subscriptionsArray, subscriptionsError) => {
       if (subscriptionsError !== null) {
         Alert.alert(
           'Error',
           'There was an error fetching data in getSubscriptions.',
           [
-            { text: 'OK', onPress: () => console.warn('OK Pressed') },
+            { text: 'OK', onPress: () => null },
           ]
         );
         return;
       }
-      this.neuraSDKManager.getPermissions((permissionsArray, permissionsError) => {
+      NeuraSDKManager.getAppPermissions((permissionsArray, permissionsError) => {
         if (permissionsError !== null) {
           Alert.alert(
             'Error',
             'There was an error fetching data in getPermissions',
             [
-              { text: 'OK', onPress: () => console.warn('OK Pressed') },
+              { text: 'OK', onPress: () => null },
             ]
           );
           return;
@@ -84,14 +83,12 @@ class SubscriptionsListScreen extends React.Component {
   }
 
   subscribeToEvent(eventName) {
-    this.neuraSDKManager.subscribeToEvent(eventName, (responseData, error) => {
+    NeuraSDKManager.subscribeToEvent(eventName, (responseData, error) => {
       if (error) {
         this.displayError(error);
-      } else {
         const index = this.subscriptionsArray.findIndex((item) => item.eventName === eventName);
-        // If successful, switch the boolean to true
-        this.subscriptionsArray[index].subscribed = true;
-        // Update datasource
+        // If error, reset the boolean to false
+        this.subscriptionsArray[index].subscribed = false;
         this.setState({
           dataSource: this.ds.cloneWithRows(this.subscriptionsArray),
         });
@@ -100,14 +97,12 @@ class SubscriptionsListScreen extends React.Component {
   }
 
   removeSubscription(eventName) {
-    this.neuraSDKManager.removeSubscriptionWithIdentifier(eventName, (responseData, error) => {
+    NeuraSDKManager.removeSubscription(eventName, (responseData, error) => {
       if (error) {
         this.displayError(error);
-      } else {
+        // If error, reset the bool to be true
         const index = this.subscriptionsArray.findIndex((item) => item.eventName === eventName);
-        // If successful, switch the boolean to false
-        this.subscriptionsArray[index].subscribed = false;
-        // Update datasource
+        this.subscriptionsArray[index].subscribed = true;
         this.setState({
           dataSource: this.ds.cloneWithRows(this.subscriptionsArray),
         });
@@ -116,10 +111,13 @@ class SubscriptionsListScreen extends React.Component {
   }
 
   switchChanged(eventName, value) {
-    const neuraSDKManager = this.neuraSDKManager;
-
     if (value) {
-      neuraSDKManager.isMissingDataForEvent(eventName, ((missingData) => {
+      NeuraSDKManager.isMissingDataForEvent(eventName, ((missingData) => {
+        const index = this.subscriptionsArray.findIndex((item) => item.eventName === eventName);
+        this.subscriptionsArray[index].subscribed = true;
+        this.setState({
+          dataSource: this.ds.cloneWithRows(this.subscriptionsArray),
+        });
         if (missingData) {
           Alert.alert(
             'Alert',
@@ -127,7 +125,7 @@ class SubscriptionsListScreen extends React.Component {
             [
               {
                 text: 'Yes',
-                onPress: () => neuraSDKManager.getMissingDataForEvent(eventName, (responseData, error) => {
+                onPress: () => NeuraSDKManager.getMissingDataForEvent(eventName, (responseData, error) => {
                   if (error) {
                     this.displayError();
                   }
