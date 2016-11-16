@@ -177,14 +177,4 @@ class SubscriptionsListScreen extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionsListScreen);
+export default SubscriptionsListScreen;
