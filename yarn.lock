@@ -5251,10 +5251,6 @@ react-native-experimental-navigation@0.26.x:
     fbjs "^0.8.1"
     react-addons-pure-render-mixin "^15.0.2"
 
-react-native-i18n@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-0.1.1.tgz#7fdc7512e71c9f5057d5f9ee8d559fc4801a1c14"
-
 react-native-mock@^0.2.6:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/react-native-mock/-/react-native-mock-0.2.7.tgz#683880c400099a1c41bbd309ec5b92b3019d6034"
