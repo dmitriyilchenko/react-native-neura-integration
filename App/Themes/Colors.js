@@ -1,8 +1,7 @@
 const colors = {
-  background: '#1F0808',
+  background: '#FFFFFF',
   clear: 'rgba(0,0,0,0)',
   neuraBlue: '#00CCFF',
-  facebook: '#3b5998',
   transparent: 'rgba(0,0,0,0)',
   silver: '#F7F7F7',
   steel: '#CCCCCC',
@@ -18,7 +17,6 @@ const colors = {
   snow: 'white',
   ember: 'rgba(164, 0, 48, 0.5)',
   fire: '#e73536',
-  drawer: 'rgba(30, 30, 29, 0.95)'
-}
+};
 
-export default colors
+export default colors;
