@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
 import { View, Text, ListView, NativeModules, Alert } from 'react-native';
-import { connect } from 'react-redux';
-// import { Actions as NavigationActions } from 'react-native-router-flux'
+import NeuraSDKManager from '../Lib/NeuraSDKManager';
 
-// For empty lists
 import AlertMessage from '../Components/AlertMessage';
 
 // Styles
@@ -13,7 +11,6 @@ class CapabilitiesList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.neuraSDKManager = NativeModules.NeuraSDKReact;
     const dataObjects = [];
     const rowHasChanged = (r1, r2) => (r1 !== r2);
 
@@ -63,7 +60,7 @@ class CapabilitiesList extends React.Component {
 
 
   fetchCapabilities() {
-    this.neuraSDKManager.getSupportedCapabilities((capabilitiesArray, error) => {
+    NeuraSDKManager.getKnownCapabilities((capabilitiesArray, error) => {
       if (error) {
         Alert.alert(
           'Error',
@@ -98,7 +95,7 @@ class CapabilitiesList extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <AlertMessage title="Nothing to See Here, Move Along" show={this.noRowData()} />
+        <AlertMessage title="Loading data" show={this.noRowData()} />
         <ListView
           contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
@@ -110,15 +107,4 @@ class CapabilitiesList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    // ...redux state to props here
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CapabilitiesList);
+export default CapabilitiesList;
