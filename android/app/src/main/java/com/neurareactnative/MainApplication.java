@@ -1,4 +1,4 @@
-package com.neurareactnativeios;
+package com.neurareactnative;
 
 import android.app.Application;
 
@@ -7,7 +7,7 @@ import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.neurareactnativeios.controller.NeuraSDKManagerPackage;
+import com.neurareactnative.controller.NeuraSDKManagerPackage;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,8 +1,8 @@
-package com.neurareactnativeios;
+package com.neurareactnative;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
-import com.neurareactnativeios.controller.NeuraSDKManagerPackage;
+import com.neurareactnative.controller.NeuraSDKManagerPackage;
 
 public class MainActivity extends ReactActivity {
 

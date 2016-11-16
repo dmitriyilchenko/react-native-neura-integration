@@ -1,4 +1,4 @@
-package com.neurareactnativeios.controller;
+package com.neurareactnative.controller;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

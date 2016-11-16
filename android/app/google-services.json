@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:469351886216:android:47d0f25b27e3621d",
         "android_client_info": {
-          "package_name": "com.neurareactnativeios"
+          "package_name": "com.neurareactnative"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "469351886216-21335l4tktqc7ihfbi03g9k9hp2m2gph.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.neurareactnativeios",
+            "package_name": "com.neurareactnative",
             "certificate_hash": "6B75009C57AFF3168D005F5618998BB5C60093F5"
           }
         },
