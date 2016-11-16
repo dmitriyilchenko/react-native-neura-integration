@@ -1,9 +1,8 @@
 import { NativeModules, Platform } from 'react-native';
+const NeuraSDKManager = Platform.OS === 'android' ? NativeModules.NeuraSDKManagerAndroid : NativeModules.NeuraSDKManageriOS;
 
-const neuraSDKBridge = Platform.os === 'ios' ? NativeModules.NeuraSDKManager : NativeModules.NeuraSDKManagerAndroid;
-
-if (Platform.os !== 'ios') {
-  neuraSDKBridge.initConnection();
+if (Platform.OS === 'android') {
+  NeuraSDKManager.initConnection();
 }
 
-export default neuraSDKBridge;
+export default NeuraSDKManager;
