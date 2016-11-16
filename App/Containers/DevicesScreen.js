@@ -1,24 +1,14 @@
 import React from 'react';
-import { View, ActionSheetIOS, Alert } from 'react-native';
-import { connect } from 'react-redux';
-import NeuraSDK from '../Lib/NeuraSDKManager';
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
-// import { Metrics } from '../Themes';
+import { View, Alert } from 'react-native';
+
+import NeuraSDKManager from '../Lib/NeuraSDKManager';
 import RoundedButton from '../Components/RoundedButton';
 import UserCapabilitiesPicker from '../Components/UserCapabilitiesPicker';
-// external libs
-// import Icon from 'react-native-vector-icons/FontAwesome';
-// import Animatable from 'react-native-animatable';
+
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
 // Styles
 // import styles from './Styles/DevicesScreenStyle';
-
-// I18n
-// import I18n from 'react-native-i18n';
-
-const BUTTONS = ['Show all', 'Add by capability', 'Add by device name', 'Cancel'];
 
 class DevicesScreen extends React.Component {
   constructor(props) {
@@ -33,42 +23,65 @@ class DevicesScreen extends React.Component {
   }
 
   addDevice(buttonIndex) {
+    let capabilityNames = [];
     let deviceName = '';
-    let capabilityName = '';
     switch (buttonIndex) {
       case 0:
+        NeuraSDKManager.addDevice((response, error) => {
+          if (error) {
+            Alert.alert(
+              'Error',
+              'There was an error adding a device.',
+              [
+                { text: 'OK', onPress: () => null },
+              ]
+            );
+          }
+        });
         break;
       case 1:
-        capabilityName = 'sleepQuality';
+        capabilityNames = ['sleepQuality'];
+        NeuraSDKManager.addDeviceByCapability(capabilityNames, (response, error) => {
+          if (error) {
+            Alert.alert(
+              'Error',
+              'There was an error adding a device.',
+              [
+                { text: 'OK', onPress: () => null },
+              ]
+            );
+          }
+        });
         break;
       case 2:
         deviceName = 'Fitbit Charge';
+        NeuraSDKManager.addDeviceByName(deviceName, (response, error) => {
+          if (error) {
+            Alert.alert(
+              'Error',
+              'There was an error adding a device.',
+              [
+                { text: 'OK', onPress: () => null },
+              ]
+            );
+          }
+        });
         break;
       default:
         return;
     }
-    NeuraSDK.addDeviceWithCapability(capabilityName, deviceName, (response, error) => {
-      if (error) {
-        Alert.alert(
-          'Error',
-          'There was an error adding a device.',
-          [
-            { text: 'OK', onPress: () => null },
-          ]
-          );
-        return;
-      }
-    });
   }
 
   showAddDeviceActionSheet() {
-    ActionSheetIOS.showActionSheetWithOptions({
-      options: BUTTONS,
-      cancelButtonIndex: this.CANCEL_INDEX,
-    },
-    (buttonIndex) => {
-      this.addDevice(buttonIndex);
-    });
+    Alert.alert(
+      'Ådd Device',
+      null,
+      [
+        { text: 'show all', onPress: () => this.addDevice(0) },
+        { text: 'by capability', onPress: () => this.addDevice(1) },
+        { text: 'by name', onPress: () => this.addDevice(2) },
+      ]
+    );
   }
 
 
@@ -113,14 +126,4 @@ class DevicesScreen extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DevicesScreen);
+export default DevicesScreen;
