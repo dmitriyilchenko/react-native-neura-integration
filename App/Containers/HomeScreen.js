@@ -8,11 +8,11 @@ import {
   Easing,
   Alert,
   Image,
-  NativeModules,
   Platform,
 } from 'react-native';
-import { connect } from 'react-redux';
+
 import RoundedButton from '../Components/RoundedButton';
+import NeuraSDKManager from '../Lib/NeuraSDKManager';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 // external libs
@@ -26,16 +26,19 @@ class HomeScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: true,
+      loggedIn: false,
     };
-    this.neuraSDKManager = NativeModules.NeuraSDKReact;
+    NeuraSDKManager.isConnected(this.checkConnected.bind(this));
     this.slideValue = new Animated.Value(0);
     this.loginButtonPressed = this.loginButtonPressed.bind(this);
     this.logoutButtonPressed = this.logoutButtonPressed.bind(this);
     this.approvedPermissionsList = this.approvedPermissionsList.bind(this);
   }
 
-  componentDidMount() {
+  checkConnected(connected) {
+    this.setState({
+      loggedIn: connected,
+    });
     this.state.loggedIn ? this.slideForward() : this.slideBack();
   }
 
@@ -85,7 +88,7 @@ class HomeScreen extends React.Component {
   }
 
   loginButtonPressed() {
-    this.neuraSDKManager.authenticateWithPermissions((token, error) => {
+    NeuraSDKManager.authenticate((token, error) => {
       if (error === null) {
         this.slideForward();
         this.setState({
@@ -98,7 +101,8 @@ class HomeScreen extends React.Component {
   }
 
   logoutButtonPressed() {
-    this.neuraSDKManager.logout();
+    NeuraSDKManager.forgetMe();
+    this.slideBack();
     this.setState({
       loggedIn: false,
     });
@@ -109,12 +113,12 @@ class HomeScreen extends React.Component {
     'Error',
     'You must be logged in to access this functionality.',
       [
-        { text: 'OK', onPress: () => console.warn('OK Pressed') },
+        { text: 'OK', onPress: () => null },
       ]
   );
   }
   approvedPermissionsList() {
-    this.neuraSDKManager.openNeuraSettingsPanel();
+    NeuraSDKManager.openNeuraSettingsPanel();
   }
 
   render() {
@@ -166,9 +170,13 @@ class HomeScreen extends React.Component {
                 Connect and Request Permissions
               </RoundedButton>
           }
-          <RoundedButton onPress={this.state.loggedIn ? this.approvedPermissionsList : this.userNotLoggedIn}>
-            Approved Permissions List
-          </RoundedButton>
+          {
+            Platform.OS === 'android' ? null :
+            <RoundedButton onPress={this.state.loggedIn ? this.approvedPermissionsList : this.userNotLoggedIn}>
+              Approved Permissions List
+            </RoundedButton>
+          }
+
           {this.state.loggedIn ?
             <RoundedButton onPress={NavigationActions.subscriptionsList}>
               Edit Subscriptions
@@ -180,10 +188,10 @@ class HomeScreen extends React.Component {
           <RoundedButton onPress={this.state.loggedIn ? NavigationActions.devicesScreen : this.userNotLoggedIn}>
             Devices
           </RoundedButton>
-          {Platform.os !== 'ios' ?
+          {Platform.OS === 'android' ?
           null
           :
-          <RoundedButton onPress={this.neuraSDKManager.sendLog}>
+          <RoundedButton onPress={NeuraSDKManager.sendLog}>
             Send Log
           </RoundedButton>
         }
@@ -193,14 +201,4 @@ class HomeScreen extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default HomeScreen;
