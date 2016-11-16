@@ -1,6 +1,7 @@
 import React from 'react';
-import { ScrollView, Text, KeyboardAvoidingView, ListView, View } from 'react-native';
-import { connect } from 'react-redux';
+import { ScrollView, Text, KeyboardAvoidingView, ListView, View, Alert } from 'react-native';
+
+import NeuraSDKManager from '../Lib/NeuraSDKManager';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 // import { Metrics } from '../Themes';
@@ -12,23 +13,49 @@ import styles from './Styles/PermissionsListStyle';
 
 
 class PermissionsList extends React.Component {
-  constructor(props) {
-    super(props);
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+  constructor() {
+    super();
+    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+      dataSource: this.ds.cloneWithRows([]),
     };
+    this.getPermissions();
   }
+  getPermissions() {
+    NeuraSDKManager.getAppPermissions((permissionsArray, permissionsError) => {
+      if (permissionsError !== null) {
+        Alert.alert(
+          'Error',
+          'There was an error fetching data in getPermissions',
+          [
+            { text: 'OK', onPress: () => null },
+          ]
+        );
+        return;
+      }
+
+      const permissionNames = permissionsArray.map((permission) => {
+        return permission.name;
+      });
+      // Finally, set a new data source for the table to update the switches
+      this.setState({
+        dataSource: this.ds.cloneWithRows(permissionNames),
+      });
+    });
+  }
+
 
   render() {
     return (
-      <View style={{ marginTop: 70 }}>
+      <View style={styles.container}>
         <Text>This app is allowed to request the following permissions:</Text>
         <ScrollView className={styles.container}>
           <KeyboardAvoidingView behavior="position">
             <ListView
+              contentContainerStyle={styles.listContent}
               dataSource={this.state.dataSource}
-              renderRow={(rowData) => <Text>{rowData}</Text>}
+              renderRow={(rowData) => <View style={styles.row}><Text style={styles.label}>{rowData}</Text></View>}
+              enableEmptySections
             >
             </ListView>
           </KeyboardAvoidingView>
@@ -38,14 +65,4 @@ class PermissionsList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PermissionsList);
+export default PermissionsList;
