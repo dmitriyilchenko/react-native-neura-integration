@@ -2,14 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMotionUsageDescription</key>
-	<string>Motion data is requried to provide a better experience</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location data is required to provide a better experience</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>neuraReactNativeiOS</string>
+	<string>NeuraReactNative</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -30,6 +26,8 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>api.openweathermap.org</key>
@@ -43,11 +41,13 @@
 				<true/>
 			</dict>
 		</dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location data is required to provide a better experience</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location data is requried to provide a better experience</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Motion data is requried to provide a better experience</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
