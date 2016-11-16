@@ -2,16 +2,11 @@ import React from 'react';
 import {
   Text,
   View,
-  NativeModules,
   Alert,
   ListView,
   Switch,
 } from 'react-native';
-import { connect } from 'react-redux';
-// Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
-
-// import { Actions as NavigationActions } from 'react-native-router-flux';
+import NeuraSDKManager from '../Lib/NeuraSDKManager';
 
 // Styles
 import styles from './Styles/SubscriptionsListViewStyle';
