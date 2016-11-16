@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">neurareactnativeios</string>
 
-    <string name="app_uid">6a1bb57d2f2f6fe47c5e83fb8eb59f21dbc3f935a30d23de3921f9f42d8d07ab</string>
-    <string name="app_secret">7fd3608dc5ce7e298b565c5e226b8939333fbd525a9125b08c7968bcadb854bf</string>
+    <string name="app_uid">d272cd697687a86cd49330ac3c1a6479942383eee1a5dee56bb2c0f42a74b6a7</string>
+    <string name="app_secret">aa7d305c23f446df4c6118302a8619b555b1d19090853a3e808192ff7b98354c</string>
 
 </resources>
