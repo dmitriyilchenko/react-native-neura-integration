@@ -1,4 +1,4 @@
-package com.neurareactnativeios.controller;
+package com.neurareactnative.controller;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -33,7 +33,7 @@ import com.neura.sdk.object.Permission;
 import com.neura.sdk.service.GetSubscriptionsCallbacks;
 import com.neura.sdk.service.SubscriptionRequestCallbacks;
 import com.neura.standalonesdk.util.SDKUtils;
-import com.neurareactnativeios.R;
+import com.neurareactnative.R;
 
 import java.util.ArrayList;
 import java.util.List;

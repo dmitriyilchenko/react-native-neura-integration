@@ -1,4 +1,4 @@
-package com.neurareactnativeios.controller;
+package com.neurareactnative.controller;
 
 import android.content.Context;
 import android.preference.PreferenceManager;

@@ -1,4 +1,4 @@
-package com.neurareactnativeios.modules;
+package com.neurareactnative.modules;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -11,7 +11,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.neura.standalonesdk.events.NeuraEvent;
 import com.neura.standalonesdk.events.NeuraPushCommandFactory;
-import com.neurareactnativeios.R;
+import com.neurareactnative.R;
 
 import java.util.Map;
 

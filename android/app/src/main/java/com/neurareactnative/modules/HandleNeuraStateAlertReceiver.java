@@ -1,4 +1,4 @@
-package com.neurareactnativeios.modules;
+package com.neurareactnative.modules;
 
 import android.content.Context;
 import android.widget.Toast;
