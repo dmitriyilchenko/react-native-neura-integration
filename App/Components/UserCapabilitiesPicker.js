@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, PickerIOS, NativeModules, Alert, TouchableOpacity } from 'react-native';
-import styles from './Styles/UserCapabilitiesPickerStyle';
+import { View, Text, Picker, Alert, TouchableOpacity, Platform } from 'react-native';
+import NeuraSDKManager from '../Lib/NeuraSDKManager';
+// import styles from './Styles/UserCapabilitiesPickerStyle';
 
-const PickerItemIOS = PickerIOS.Item;
+const Item = Picker.Item;
 
 export default class UserCapabilitiesPicker extends React.Component {
   constructor(props) {
@@ -12,13 +13,13 @@ export default class UserCapabilitiesPicker extends React.Component {
       capabilities: [],
       chosenCapability: null,
     };
-    this.neuraSDKManager = NativeModules.NeuraSDKReact;
-    this.getSupportedCapabilities();
+
+    this.getKnownCapabilities();
     this.checkCapability = this.checkCapability.bind(this);
   }
 
-  getSupportedCapabilities() {
-    this.neuraSDKManager.getSupportedCapabilities((capabilitiesArray, error) => {
+  getKnownCapabilities() {
+    NeuraSDKManager.getKnownCapabilities((capabilitiesArray, error) => {
       if (error) {
         Alert.alert(
           'Error',
@@ -31,13 +32,14 @@ export default class UserCapabilitiesPicker extends React.Component {
       }
       this.setState({
         capabilities: capabilitiesArray,
+        chosenCapability: capabilitiesArray[0],
       });
     });
   }
 
   checkCapability() {
     const chosenCapability = this.state.chosenCapability;
-    this.neuraSDKManager.hasDeviceWithCapability(chosenCapability, (capabilityResponse, error) => {
+    NeuraSDKManager.hasDeviceWithCapability(chosenCapability, (capabilityResponse, error) => {
       if (error) {
         Alert.alert(
           'Error',
@@ -48,9 +50,16 @@ export default class UserCapabilitiesPicker extends React.Component {
         );
         return;
       }
-      const responseText = capabilityResponse.status === 'NO' ? ("User does not have " + chosenCapability) : ("User has " + chosenCapability);
+
+      let responseText = '';
+      if (Platform.OS === 'android') {
+        responseText = capabilityResponse === false ? ("User does not have " + chosenCapability) : ("User has " + chosenCapability);
+      } else {
+        responseText = capabilityResponse.status === 'NO' ? ("User does not have " + chosenCapability) : ("User has " + chosenCapability);
+      }
+
       Alert.alert(
-        'Alert',
+        'Response',
         responseText,
         [
           { text: 'OK', onPress: () => null },
@@ -71,19 +80,18 @@ export default class UserCapabilitiesPicker extends React.Component {
             <Text style={{ color: '#00ccff' }}>Check</Text>
           </TouchableOpacity>
         </View>
-        <PickerIOS
+        <Picker
           selectedValue={this.state.chosenCapability}
           key={this.state.capability}
           onValueChange={(chosenCapability) => this.setState({ chosenCapability })}
         >
           {this.state.capabilities.map((capability) => (
-            <PickerItemIOS
-              key={capability}
+            <Item
               value={capability}
               label={capability}
             />
           ))}
-        </PickerIOS>
+        </Picker>
       </View>
     );
   }
