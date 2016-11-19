@@ -82,13 +82,14 @@ export default class UserCapabilitiesPicker extends React.Component {
         </View>
         <Picker
           selectedValue={this.state.chosenCapability}
-          key={this.state.capability}
+          key={this.state.chosenCapability}
           onValueChange={(chosenCapability) => this.setState({ chosenCapability })}
         >
           {this.state.capabilities.map((capability) => (
             <Item
               value={capability}
               label={capability}
+              key={capability}
             />
           ))}
         </Picker>
