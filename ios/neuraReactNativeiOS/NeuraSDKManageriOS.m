@@ -110,7 +110,7 @@ RCT_EXPORT_METHOD(subscribeToEvent:(NSString *)eventName callback:(RCTResponseSe
   }];
 }
 
-RCT_EXPORT_METHOD(removeSubscriptionWithIdentifier:(NSString *)eventName callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(removeSubscription:(NSString *)eventName callback:(RCTResponseSenderBlock)callback)
 {
   [[NeuraSDK sharedInstance]removeSubscriptionWithIdentifier:[NSString stringWithFormat:@"_%@",eventName] complete:^(NSDictionary *responseData, NSString *error) {
     if (error) {
