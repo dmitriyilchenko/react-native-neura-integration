@@ -112,7 +112,7 @@ class DevicesScreen extends React.Component {
           Get All Devices
         </RoundedButton>
         <RoundedButton onPress={this.showAddDeviceActionSheet}>
-          Add a Device
+          Add a device
         </RoundedButton>
 
         {this.state.showPicker

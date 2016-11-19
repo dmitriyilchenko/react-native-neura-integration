@@ -131,7 +131,7 @@ class HomeScreen extends React.Component {
         <KeyboardAvoidingView behavior="position">
           <View style={styles.centered}>
             <Image source={Images.neuraSdkDemoLogo} style={styles.sdklogo} />
-            <Text style={{ marginBottom: 20 }}>React Native</Text>
+            <Text style={{ marginBottom: 10 }}>React Native</Text>
             <Animated.Image
               source={Images.neuraSymbolTopElement}
               className={styles.logo}
@@ -146,7 +146,7 @@ class HomeScreen extends React.Component {
               style={{
                 marginLeft: this.slideRight,
                 opacity: this.opacity,
-                marginBottom: 20,
+                marginBottom: 10,
               }}
             />
             <Text>
