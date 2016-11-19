@@ -121,6 +121,10 @@ class HomeScreen extends React.Component {
     NeuraSDKManager.openNeuraSettingsPanel();
   }
 
+  sendLog() {
+    NeuraSDKManager.sendLog();
+  }
+
   render() {
     return (
       <View
@@ -191,7 +195,7 @@ class HomeScreen extends React.Component {
           {Platform.OS === 'android' ?
           null
           :
-          <RoundedButton onPress={NeuraSDKManager.sendLog}>
+          <RoundedButton onPress={this.sendLog}>
             Send Log
           </RoundedButton>
         }
