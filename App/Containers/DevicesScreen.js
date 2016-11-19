@@ -74,7 +74,7 @@ class DevicesScreen extends React.Component {
 
   showAddDeviceActionSheet() {
     Alert.alert(
-      'Ådd Device',
+      'Add Device',
       null,
       [
         { text: 'show all', onPress: () => this.addDevice(0) },
