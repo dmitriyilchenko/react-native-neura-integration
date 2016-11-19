@@ -10,7 +10,7 @@ export default StyleSheet.create({
     marginHorizontal: Metrics.section,
     marginVertical: Metrics.baseMargin,
     backgroundColor: Colors.neuraBlue,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   buttonText: {
     color: Colors.snow,
