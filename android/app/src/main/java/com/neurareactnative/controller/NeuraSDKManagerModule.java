@@ -213,7 +213,7 @@ public class NeuraSDKManagerModule extends ReactContextBaseJavaModule {
                     map.putString("addId", list.get(i).getAppId());
                     map.putString("usageDescription", list.get(i).getUsageDescription());
                     map.putString("neuraId", list.get(i).getNeuraId());
-
+                    System.out.println(list.get(i).getIdentifier());
                     subscriptionArray.pushMap(map);
                 }
 
@@ -263,15 +263,14 @@ public class NeuraSDKManagerModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void isMissingDataForEvent(String eventName, final Callback callback) {
-        Toast.makeText(mReactApplicationContext, "Is missing data", Toast.LENGTH_LONG).show();
         boolean b = NeuraManager.getInstance().getClient().isMissingDataForEvent(eventName);
         callback.invoke(b);
     }
 
     @ReactMethod
     public void removeSubscription(String eventName, final Callback callback) {
-        Toast.makeText(mReactApplicationContext, "Is missing data", Toast.LENGTH_LONG).show();
-        NeuraManager.getInstance().getClient().removeSubscription(eventName, eventName, true, new SubscriptionRequestCallbacks() {
+        System.out.println(eventName);
+        NeuraManager.getInstance().getClient().removeSubscription(eventName, ("_"+eventName), true, new SubscriptionRequestCallbacks() {
             @Override
             public void onSuccess(String s, Bundle bundle, String s1) {
                 callback.invoke(s, null);
@@ -375,7 +374,6 @@ public class NeuraSDKManagerModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void hasDeviceWithCapability(String capabilityName, final Callback callback) {
-        Toast.makeText(mReactApplicationContext, "Has device with capability", Toast.LENGTH_LONG).show();
         Boolean hasCapability = NeuraManager.getInstance().getClient().hasDeviceWithCapability(capabilityName);
         callback.invoke(hasCapability);
     }
