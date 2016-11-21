@@ -29,3 +29,6 @@ All data returned from our SDK is returned in a callback consistent with typical
 The sample app is an excellent resource to familiarize yourself with the basic functionality of both React Native Native Modules and our bridged SDK.
 
 Please note that all functionality provided here is still in beta. If you have any questions, comments, or suggestions, we'd love to hear from you.
+
+## Swift 3
+Because many developers are now coding in Swift 3, we've also converted the sample app. Please see the "swift_3" branch and our website for the swift 3 documentation.
