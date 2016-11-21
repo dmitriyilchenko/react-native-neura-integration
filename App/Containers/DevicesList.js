@@ -96,7 +96,7 @@ class DevicesList extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <AlertMessage title="Nothing to See Here, Move Along" show={this.noRowData()} />
+        <AlertMessage title="Still loading data..." show={this.noRowData()} />
         <ListView
           contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
