@@ -24,43 +24,13 @@ class CapabilitiesList extends React.Component {
     this.fetchCapabilities();
   }
 
-  /* ***********************************************************
-  * STEP 3
-  * `_renderRow` function -How each cell/row should be rendered
-  * It's our best practice to place a single component here:
-  *
-  * e.g.
-    return <MyCustomCell title={rowData.title} description={rowData.description} />
-  *************************************************************/
-
-
-  /* ***********************************************************
-  * STEP 4
-  * If your datasource is driven by Redux, you'll need to
-  * reset it when new data arrives.
-  * DO NOT! place `cloneWithRows` inside of render, since render
-  * is called very often, and should remain fast!  Just replace
-  * state's datasource on newProps.
-  *
-  * e.g.
-    componentWillReceiveProps (newProps) {
-      if (newProps.someData) {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(newProps.someData)
-        })
-      }
-    }
-  *************************************************************/
-
-  // Used for friendly AlertMessage
-  // returns true if the dataSource is empty
   noRowData() {
     return this.state.dataSource.getRowCount() === 0;
   }
 
 
   fetchCapabilities() {
-    NeuraSDKManager.getKnownCapabilities((capabilitiesArray, error) => {
+    NeuraSDKManager.getKnownCapabilities((capabilitiesDict, error) => {
       if (error) {
         Alert.alert(
           'Error',
