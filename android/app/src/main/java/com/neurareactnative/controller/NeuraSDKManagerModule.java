@@ -336,11 +336,16 @@ public class NeuraSDKManagerModule extends ReactContextBaseJavaModule {
     public void getKnownCapabilities(Callback callback) {
         Toast.makeText(mReactApplicationContext, "Known capabilities", Toast.LENGTH_LONG).show();
         ArrayList<Capability> capabilityArray = NeuraManager.getInstance().getClient().getKnownCapabilities();
-        WritableArray capabilityNameArray = new WritableNativeArray();
+
+        WritableArray capabilities = new WritableNativeArray();
         for (Capability capability : capabilityArray) {
-            capabilityNameArray.pushString(capability.getDisplayName());
+            WritableMap capabilityMap = new WritableNativeMap();
+            capabilityMap.putString("name", capability.getName());
+            capabilityMap.putString("displayName", capability.getDisplayName());
+
+            capabilities.pushMap(capabilityMap);
         }
-        callback.invoke(capabilityNameArray, null);
+        callback.invoke(capabilities, null);
     }
 
     @ReactMethod
