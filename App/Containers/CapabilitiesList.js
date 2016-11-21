@@ -41,8 +41,11 @@ class CapabilitiesList extends React.Component {
         );
         return;
       }
+      const capabilityNames = capabilitiesDict.map((capability) => {
+        return capability.displayName;
+      });
       this.setState({
-        dataSource: this.ds.cloneWithRows(capabilitiesArray),
+        dataSource: this.ds.cloneWithRows(capabilityNames),
       });
     });
   }

@@ -19,7 +19,7 @@ export default class UserCapabilitiesPicker extends React.Component {
   }
 
   getKnownCapabilities() {
-    NeuraSDKManager.getKnownCapabilities((capabilitiesArray, error) => {
+    NeuraSDKManager.getKnownCapabilities((capabilitiesResponse, error) => {
       if (error) {
         Alert.alert(
           'Error',
@@ -30,9 +30,10 @@ export default class UserCapabilitiesPicker extends React.Component {
         );
         return;
       }
+
       this.setState({
-        capabilities: capabilitiesArray,
-        chosenCapability: capabilitiesArray[0],
+        capabilities: capabilitiesResponse,
+        chosenCapability: capabilitiesResponse[0].name,
       });
     });
   }
@@ -83,13 +84,13 @@ export default class UserCapabilitiesPicker extends React.Component {
         <Picker
           selectedValue={this.state.chosenCapability}
           key={this.state.chosenCapability}
-          onValueChange={(chosenCapability) => this.setState({ chosenCapability })}
+          onValueChange={(itemPosition) => this.setState({ this.state.capabilities[itemPosition].name })}
         >
           {this.state.capabilities.map((capability) => (
             <Item
-              value={capability}
-              label={capability}
-              key={capability}
+              value={capability.name}
+              label={capability.displayName}
+              key={capability.name}
             />
           ))}
         </Picker>
