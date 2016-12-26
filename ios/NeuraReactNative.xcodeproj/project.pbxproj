@@ -34,10 +34,8 @@
 		D643E3A21A6A47CA93B9E925 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E1B8C02D5CC423D967DC011 /* EvilIcons.ttf */; };
 		D8429F1C9B184808A1838C4E /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E7693851F14FA9A487D44A /* libReactNativeConfig.a */; };
 		E006D01E3FEE4A57ADA89A3A /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBAD6FFC016B48628422B960 /* libRNDeviceInfo.a */; };
+		E10C08301E014B2600C055F0 /* NeuraSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E10C082D1E014B2300C055F0 /* NeuraSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E19601051DCA44DB00F64225 /* NeuraSDKManageriOS.m in Sources */ = {isa = PBXBuildFile; fileRef = E19601041DCA44DB00F64225 /* NeuraSDKManageriOS.m */; };
-		E1FDB3481DE10FD70073338F /* NeuraSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FDB3471DE10FD70073338F /* NeuraSDK.framework */; };
-		E1FDB3491DE10FDB0073338F /* NeuraSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FDB3471DE10FD70073338F /* NeuraSDK.framework */; };
-		E1FDB34A1DE10FDB0073338F /* NeuraSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E1FDB3471DE10FD70073338F /* NeuraSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,13 +203,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E1FAC5701DD1CFD50009D7BC /* Embed Frameworks */ = {
+		E1D524B41E004C520057ECC7 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E1FDB34A1DE10FDB0073338F /* NeuraSDK.framework in Embed Frameworks */,
+				E10C08301E014B2600C055F0 /* NeuraSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,9 +250,9 @@
 		AF688C2C5672481A88EB2E71 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		BB512D6438E243118ACF4AF6 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		DBAD6FFC016B48628422B960 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
+		E10C082D1E014B2300C055F0 /* NeuraSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NeuraSDK.framework; sourceTree = "<group>"; };
 		E19601041DCA44DB00F64225 /* NeuraSDKManageriOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NeuraSDKManageriOS.m; path = neuraReactNativeiOS/NeuraSDKManageriOS.m; sourceTree = "<group>"; };
 		E19601061DCA450F00F64225 /* NeuraSDKManageriOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NeuraSDKManageriOS.h; path = neuraReactNativeiOS/NeuraSDKManageriOS.h; sourceTree = "<group>"; };
-		E1FDB3471DE10FD70073338F /* NeuraSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NeuraSDK.framework; sourceTree = "<group>"; };
 		E8B827AE3180478DBFCB2739 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		ED5A767707A84697A5E592B6 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		F8E7693851F14FA9A487D44A /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
@@ -274,11 +272,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
-				E1FDB3481DE10FD70073338F /* NeuraSDK.framework in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
-				E1FDB3491DE10FDB0073338F /* NeuraSDK.framework in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
@@ -336,12 +332,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		00E356EF1AD99517003FC87E /* neuraReactNativeiOSTests */ = {
+		00E356EF1AD99517003FC87E /* NeuraReactNativeiOSTests */ = {
 			isa = PBXGroup;
 			children = (
 				00E356F21AD99517003FC87E /* neuraReactNativeiOSTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
+			name = NeuraReactNativeiOSTests;
 			path = neuraReactNativeiOSTests;
 			sourceTree = "<group>";
 		};
@@ -454,7 +451,7 @@
 			children = (
 				13B07FAE1A68108700A75B9A /* NeuraReactNative */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* neuraReactNativeiOSTests */,
+				00E356EF1AD99517003FC87E /* NeuraReactNativeiOSTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				0D5954D240B44D1AAE8E5CFC /* Resources */,
 			);
@@ -507,9 +504,9 @@
 		E19600E81DCA445300F64225 /* NeuraSDK */ = {
 			isa = PBXGroup;
 			children = (
+				E10C082D1E014B2300C055F0 /* NeuraSDK.framework */,
 				E19601061DCA450F00F64225 /* NeuraSDKManageriOS.h */,
 				E19601041DCA44DB00F64225 /* NeuraSDKManageriOS.m */,
-				E1FDB3471DE10FD70073338F /* NeuraSDK.framework */,
 			);
 			name = NeuraSDK;
 			sourceTree = "<group>";
@@ -543,7 +540,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				E1FAC5701DD1CFD50009D7BC /* Embed Frameworks */,
+				E1D524B41E004C520057ECC7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -968,7 +965,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.reactNativeSDKSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ReactNativeSDKSample;
 				PRODUCT_NAME = NeuraReactNative;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1007,7 +1004,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.reactNativeSDKSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ReactNativeSDKSample;
 				PRODUCT_NAME = NeuraReactNative;
 				SWIFT_OBJC_BRIDGING_HEADER = "neuraReactNativeiOS-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
