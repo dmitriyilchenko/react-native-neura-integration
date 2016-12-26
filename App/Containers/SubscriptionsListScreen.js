@@ -36,38 +36,46 @@ class SubscriptionsListScreen extends React.Component {
         );
         return;
       }
-      NeuraSDKManager.getAppPermissions((permissionsArray, permissionsError) => {
-        if (permissionsError !== null) {
-          Alert.alert(
-            'Error',
-            'There was an error fetching data in getPermissions',
-            [
-              { text: 'OK', onPress: () => null },
-            ]
-          );
-          return;
-        }
-        // Get the permissions and subscriptions names into an array so we can figure out what subscriptions the user has
-        const subscriptionNames = subscriptionsArray.map((subscription) => {
-          return subscription.eventName;
+      // Get the permissions and subscriptions names into an array so we can figure out what subscriptions the user has
+      const subscriptionNames = subscriptionsArray.map((subscription) => subscription.eventName);
+      // You can find the event names in the developer console at dev.theneura.com
+      const eventNames = [
+        'userArrivedHome',
+        'userArrivedHomeFromWork',
+        'userLeftHome',
+        'userArrivedHomeByWalking',
+        'userArrivedHomeByRunning',
+        'userIsOnTheWayHome',
+        'userIsIdleAtHome',
+        'userStartedWorkOut',
+        'userFinishedRunning',
+        'userFinishedWorkOut',
+        'userLeftGym',
+        'userFinishedWalking',
+        'userArrivedToGym',
+        'userIsIdleFor2Hours',
+        'userStartedWalking',
+        'userIsIdleFor1Hour',
+        'userStartedRunningFromPlace',
+        'userStartedTransitByWalking',
+        'userStartedRunning',
+        'userFinishedTransitByWalking',
+        'userLeftWork',
+        'userLeftHome',
+      ];
+      // Loop through the events and see if each one is also in subscriptions
+      const subscriptions = [];
+      for (const eventName of eventNames) {
+        subscriptions.push({
+          eventName,
+          subscribed: (subscriptionNames.indexOf(eventName) !== -1),
         });
-        const permissionNames = permissionsArray.map((permission) => {
-          return permission.name;
-        });
-        // Loop through the permissiosn and see if each one is also in subscriptions
-        const subscriptions = [];
-        for (const permission of permissionNames) {
-          subscriptions.push({
-            eventName: permission,
-            subscribed: (subscriptionNames.indexOf(permission) !== -1),
-          });
-        }
-        // We have to keep a subscriptions array for subscribing and unsubscribing to events
-        this.subscriptionsArray = subscriptions;
-        // Finally, set a new data source for the table to update the switches
-        this.setState({
-          dataSource: this.ds.cloneWithRows(subscriptions),
-        });
+      }
+      // We have to keep a subscriptions array for subscribing and unsubscribing to events
+      this.subscriptionsArray = subscriptions;
+      // Finally, set a new data source for the table to update the switches
+      this.setState({
+        dataSource: this.ds.cloneWithRows(subscriptions),
       });
     });
   }
