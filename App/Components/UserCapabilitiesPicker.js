@@ -30,7 +30,6 @@ export default class UserCapabilitiesPicker extends React.Component {
         );
         return;
       }
-
       this.setState({
         capabilities: capabilitiesResponse,
         chosenCapability: capabilitiesResponse[0].name,
@@ -84,7 +83,7 @@ export default class UserCapabilitiesPicker extends React.Component {
         <Picker
           selectedValue={this.state.chosenCapability}
           key={this.state.chosenCapability}
-          onValueChange={(itemPosition) => this.setState({ this.state.capabilities[itemPosition].name })}
+          onValueChange={(value, itemPosition) => this.setState({ chosenCapability: this.state.capabilities[itemPosition].name })}
         >
           {this.state.capabilities.map((capability) => (
             <Item
