@@ -22,7 +22,13 @@ RCT_EXPORT_METHOD(authenticate:(RCTResponseSenderBlock)callback)
   AppDelegate *delegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
   UIViewController *controller = delegate.rootViewController;
   NSMutableArray *permissionsList = nil;
-  permissionsList = [NSMutableArray arrayWithObjects:@"userLeftWork", @"userLeftHome", nil];
+  permissionsList = [NSMutableArray arrayWithObjects:
+                     @"presenceAtHome",
+                     @"physicalActivity",
+                     @"userLeftWork",
+                     @"userLeftHome",
+                     nil
+  ];
   
   dispatch_async(dispatch_get_main_queue(), ^{
     [[NeuraSDK sharedInstance] authenticateWithPermissions:permissionsList
@@ -101,7 +107,7 @@ RCT_EXPORT_METHOD(getMissingDataForEvent:(NSString *)eventName callback:(RCTResp
 
 RCT_EXPORT_METHOD(subscribeToEvent:(NSString *)eventName callback:(RCTResponseSenderBlock)callback)
 {
-  [[NeuraSDK sharedInstance]subscribeToEvent:eventName identifier:[NSString stringWithFormat:@"_%@",eventName] webHookID:nil state:[NSString stringWithFormat:@"state_%@",eventName] completion:^(NSDictionary *responseData, NSString *error) {
+  [[NeuraSDK sharedInstance]subscribeToEvent:eventName identifier:[NSString stringWithFormat:@"_%@",eventName] webHookID:nil completion:^(NSDictionary *responseData, NSString *error) {
     if (error) {
       callback(@[[NSNull null], error]);
       return;

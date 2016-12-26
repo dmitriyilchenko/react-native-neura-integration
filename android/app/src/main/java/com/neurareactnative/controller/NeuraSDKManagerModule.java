@@ -60,20 +60,11 @@ public class NeuraSDKManagerModule extends ReactContextBaseJavaModule {
          * for example : https://s31.postimg.org/x8phjuza3/Screen_Shot_2016_07_27_at_1.png
          */
         mPermissions = new ArrayList<>(Permission.list(new String[]{
-                "userLeftWork", "userLeftHome", "userLeftActiveZone", "userArrivedWorkFromHome",
-                "userArrivedHome", "userArrivedHomeFromWork", "userArrivedToWork",
-                "userArrivedAtGroceryStore", "userArrivedAtSchoolCampus", "userArrivedAtAirport",
-                "userArrivedAtHospital", "userLeftAirport", "userArrivedAtClinic",
-                "userArrivedAtRestaurant", "userLeftCafe", "userLeftHospital", "userArrivedAtCafe",
-                "userLeftRestaurant", "userLeftSchoolCampus", "userArrivedAtPharmacy", "userLeftGym",
-                "userArrivedAtActiveZone", "userArrivedToGym", "userStartedRunning",
-                "userStartedWalking", "userFinishedRunning", "userFinishedDriving",
-                "userStartedDriving", "userFinishedWalking", "userStartedWorkOut", "userWokeUp",
-                "userStartedSleeping", "userGotUp", "userFinishedWorkOut", "userIsIdle",
-                "userIsOnTheWayToWork", "userIsOnTheWayToActiveZone", "userIsOnTheWayHome",
-                "activitySummaryPerPlace", "wellnessProfile", "dailyActivitySummary",
-                "getLocationNodesSemantics", "sleepData", "getPersonNodesSemantics",
-                "getDeviceNodesSemantics", "userDetails", "userSituation"}));
+                "presenceAtHome",
+                "physicalActivity",
+                "userLeftWork",
+                "userLeftHome"
+        }));
     }
 
     @Override
@@ -380,7 +371,7 @@ public class NeuraSDKManagerModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void hasDeviceWithCapability(String capabilityName, final Callback callback) {
         Boolean hasCapability = NeuraManager.getInstance().getClient().hasDeviceWithCapability(capabilityName);
+        System.out.println("the capability name is " + capabilityName + " and the response is " + hasCapability);
         callback.invoke(hasCapability);
     }
 }
-
