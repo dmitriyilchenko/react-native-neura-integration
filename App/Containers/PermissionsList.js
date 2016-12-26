@@ -34,9 +34,7 @@ class PermissionsList extends React.Component {
         return;
       }
 
-      const permissionNames = permissionsArray.map((permission) => {
-        return permission.name;
-      });
+      const permissionNames = permissionsArray.map((permission) => permission.name);
       // Finally, set a new data source for the table to update the switches
       this.setState({
         dataSource: this.ds.cloneWithRows(permissionNames),
