@@ -80,7 +80,7 @@ class DevicesScreen extends React.Component {
         { text: 'Show all available devices', onPress: () => this.addDevice(0) },
         { text: 'Add by capability', onPress: () => this.addDevice(1) },
         { text: 'Add by name', onPress: () => this.addDevice(2) },
-        { text: 'Cancel', onPress: () => null, style: 'cancel'},
+        { text: 'Cancel', onPress: () => null, style: 'cancel' },
       ]
     );
   }
