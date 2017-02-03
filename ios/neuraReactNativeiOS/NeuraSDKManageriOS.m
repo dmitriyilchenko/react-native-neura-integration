@@ -167,11 +167,8 @@ RCT_EXPORT_METHOD(hasDeviceWithCapability:(NSString *)capability callback:(RCTRe
    }];
 }
 
-RCT_EXPORT_METHOD(addDeviceByCapability:(NSArray *)capability deviceName:(NSString *)deviceName callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(addDeviceByCapability:(NSArray *)capability callback:(RCTResponseSenderBlock)callback)
 {
-  if ([capability count]) {
-    [NSException raise:@"Invalid capability array length" format:@"size of %lu is invalid", (unsigned long)[capability count]];
-  }
   dispatch_async(dispatch_get_main_queue(), ^{
     [[NeuraSDK sharedInstance]
      addDeviceWithCapability:capability[0]

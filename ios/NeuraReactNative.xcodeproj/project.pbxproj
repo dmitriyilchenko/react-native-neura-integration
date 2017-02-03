@@ -172,20 +172,6 @@
 			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
 			remoteInfo = ReactNativeConfig;
 		};
-		E162166B1DCA3ADE00E36830 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BB512D6438E243118ACF4AF6 /* RNI18n.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDD7BF781B2D5125006FDA75;
-			remoteInfo = RNI18n;
-		};
-		E162166D1DCA3ADE00E36830 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BB512D6438E243118ACF4AF6 /* RNI18n.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CDD7BF831B2D5126006FDA75;
-			remoteInfo = RNI18nTests;
-		};
 		E16216701DCA3ADE00E36830 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5C0148AD8DE34F82ACDA6BE3 /* RNVectorIcons.xcodeproj */;
@@ -248,7 +234,6 @@
 		8D52B731B4DD473D9FB18457 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		9E1B8C02D5CC423D967DC011 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		AF688C2C5672481A88EB2E71 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		BB512D6438E243118ACF4AF6 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		DBAD6FFC016B48628422B960 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		E10C082D1E014B2300C055F0 /* NeuraSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NeuraSDK.framework; sourceTree = "<group>"; };
 		E19601041DCA44DB00F64225 /* NeuraSDKManageriOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NeuraSDKManageriOS.m; path = neuraReactNativeiOS/NeuraSDKManageriOS.m; sourceTree = "<group>"; };
@@ -430,7 +415,6 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				65D2F751C79441DB8F8981B2 /* ReactNativeConfig.xcodeproj */,
-				BB512D6438E243118ACF4AF6 /* RNI18n.xcodeproj */,
 				5C0148AD8DE34F82ACDA6BE3 /* RNVectorIcons.xcodeproj */,
 				8C5034471C264A2BABC5582D /* RNDeviceInfo.xcodeproj */,
 			);
@@ -464,15 +448,6 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* NeuraReactNative.app */,
 				00E356EE1AD99517003FC87E /* NeuraReactNativeTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E162163C1DCA3ADE00E36830 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E162166C1DCA3ADE00E36830 /* libRNI18n.a */,
-				E162166E1DCA3ADE00E36830 /* RNI18nTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -562,11 +537,9 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = AT8427PUUG;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = AT8427PUUG;
 						LastSwiftMigration = 810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -636,10 +609,6 @@
 				{
 					ProductGroup = E18A636E1DD48B7B00D2F66D /* Products */;
 					ProjectRef = 8C5034471C264A2BABC5582D /* RNDeviceInfo.xcodeproj */;
-				},
-				{
-					ProductGroup = E162163C1DCA3ADE00E36830 /* Products */;
-					ProjectRef = BB512D6438E243118ACF4AF6 /* RNI18n.xcodeproj */;
 				},
 				{
 					ProductGroup = E162163E1DCA3ADE00E36830 /* Products */;
@@ -781,20 +750,6 @@
 			remoteRef = E16216641DCA3ADE00E36830 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E162166C1DCA3ADE00E36830 /* libRNI18n.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNI18n.a;
-			remoteRef = E162166B1DCA3ADE00E36830 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E162166E1DCA3ADE00E36830 /* RNI18nTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RNI18nTests.xctest;
-			remoteRef = E162166D1DCA3ADE00E36830 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		E16216711DCA3ADE00E36830 /* libRNVectorIcons.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -901,6 +856,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -923,6 +879,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = neuraReactNativeiOSTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -944,7 +901,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = AT8427PUUG;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -983,7 +940,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AT8427PUUG;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
