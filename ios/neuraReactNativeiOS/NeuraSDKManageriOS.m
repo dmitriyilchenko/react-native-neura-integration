@@ -25,8 +25,6 @@ RCT_EXPORT_METHOD(authenticate:(RCTResponseSenderBlock)callback)
   permissionsList = [NSMutableArray arrayWithObjects:
                      @"presenceAtHome",
                      @"physicalActivity",
-                     @"userLeftWork",
-                     @"userLeftHome",
                      nil
   ];
   
