@@ -1,32 +1,96 @@
-# React Native Sample App
+# react-native-neura
 
-This sample app demontrates the integration of both the iOS and Android SDKs into React Native.
+A simple plugin that allows using Neura for React Native.
 
-Here, we'll break it down into three main steps. If you're only integrating for iOS or Android, feel free to skip the irrelevant section.
+## VERSIONS
 
-## iOS
-On the <a href="https://dev.theneura.com/docs/guide/ios/setup">Neura Devsite</a> follow the initial setup guide until you hit the "How to use the SDK" section. From here, you'll follow this guide.
+* react-native-neura >= 0.1.0 supports react-native >= 0.52.0 and react == 16.0.0
 
-In your AppDelegate.h file, create a reference to the root view controller. We'll need this to conduct actions that run on the main UI thread in the application.
+## Known issues
+
+I could not find how to make the import for iOS work properly since I'm using Cocoapods for Neura. If you have a suggestion that would be great.
+
+## Getting started
+
+Follow the instructions to install the SDK for
+  * [iOS](https://dev.theneura.com/tutorials/ios)
+  * [Android](https://dev.theneura.com/tutorials/android)
+
+### - Auto install
+  Comming soon...
+
+### - Manual install
+#### iOS
+1. `npm i --save react-native-neura` OR `yarn add react-native-neura`
+2. In Xcode: 
+  1. Create a new group NeuraRN inside Libraries catalog.
+  2. drag and drop into NeuraRN group:
+    * `node_modules/react-native-neura/ios/NeuraSDKManager/NeuraSDKManager.m`
+    * `node_modules/react-native-neura/ios/NeuraSDKManager/NeuraSDKManager.h`
+
+#### Android
+1. `npm i --save react-native-neura` OR `yarn add react-native-neura`
+2. `react-native link react-native-neura`
+3. Connect Firebase (for push notifications)
+    - open AndroidStudio
+    - `Open an existing Android Studio project`
+    - select ${projectRoot}/android
+    - Click `Tools > Firebase` to open the `Assistant window`
+    - Click `Cloud messaging`
+    - Click `Connect to Firebase`
+    - Create new or select existed firebase project
+    - Click `Add FCM to your app`
+    - Accept Changes
+4. open file `android/app/build.gradle` and update dependencies:
 ```
-@property (nonatomic, strong) UIViewController *rootViewController;
+  ...
+  android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+
+    defaultConfig {
+        ...
+        targetSdkVersion 24
+        ...
+    }
+    ...
+    dependencies {
+      ...
+      compile "com.android.support:appcompat-v7:23.4.0"
+      ...
+```
+## Usage
+
+*** Android version have to be initialized (call `init` method) before using
+
+Methods:
+  * (Android only) `init`:({ appUid: string, secret: string }) => void
+  * `authenticate`:() => `Promise<string | Error>`
+  * `isAuthenticated`: () => `Promise<boolean>`
+  * `getUserAccessToken`: () => `Promise<?string>`
+  * `getUserId`: () => `Promise<?string>`
+
+Example:
+```
+    import Neura from 'react-native-neura'
+
+    ...
+      try {
+        //Just for android
+        Neura.init()
+
+        const isAuth = await Neura.isAuthenticated()
+
+        if (!isAuth) {
+          const token = await Neura.authenticate()
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    ...
 ```
 
-Next, make sure to assign this property to the root view controller that you create in appDelegate.m. See the code provided in the sample for reference.
+## TODO
 
-In order to access native API methods from React Native code, you need a Bridge Module. For the Neura SDK, we've included one in the sample project, classed NeuraSDKManageriOS. Drag both the .h and .m files into your project. You'll also need the actual Neura SDK. Drag the appropriate one in (depending on if you're testing on the simulator or an actual device) and make sure to follow the steps outlined on the Neura website, including editing your info.plist, and adding the SDK as an embedded binary.
-
-## Android
-When bridging the Android SDK, there are two important files to take note of, the NeuraSDKManagerModule and the NeuraSDKManagerPackage. Both of these files must be included in your project as well. Be sure include these two modules in your MainApplication getPackages() method.
-
-
-## Final steps (both platforms)
-If you take a look at the sample app, you'll find a NeuraSDKManager.js file in the App/Lib directory. Because we have made on effort to ensure consistency across naming and functionality for functions in their respective bridges, there is no need to use two different bridged SDKs in your project. Simply drag the NeuraSDKManager.js file into your project. This file asks React Native whether the current platform is iOS or Android and all method calls to the right one. When it comes time to make an SDK call, import the SDK into the component or container that requires it with:
-```
-import NeuraSDKManager from '../Lib/NeuraSDKManager';
-```
-All data returned from our SDK is returned in a callback consistent with typical JS code. If you'd like to learn more about how bridging works in React Native, we highly suggest you take a look at the resources that Facebook has provided <a href="https://facebook.github.io/react-native/docs/native-modules-ios.html">here for iOS</a> or <a href="https://facebook.github.io/react-native/docs/native-modules-android.html">here for Android</a>.
-The sample app is an excellent resource to familiarize yourself with the basic functionality of both React Native Native Modules and our bridged SDK.
-
-Please note that all functionality provided here is still in beta. If you have any questions, comments, or suggestions, we'd love to hear from you.
-
+* ~~Add android support~~
+* Improve ios installation
