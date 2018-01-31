@@ -89,8 +89,3 @@ Example:
       }
     ...
 ```
-
-## TODO
-
-* ~~Add android support~~
-* Improve ios installation
