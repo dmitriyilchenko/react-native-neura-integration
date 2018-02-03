@@ -4,7 +4,7 @@ A simple plugin that allows using Neura for React Native.
 
 ## VERSIONS
 
-* react-native-neura >= 0.1.0 supports react-native >= 0.52.0 and react == 16.0.0
+* react_native_sample_app >= 0.1.0 supports react-native >= 0.52.0 and react == 16.0.0
 
 ## Known issues
 
@@ -29,8 +29,8 @@ Follow the instructions to install the SDK for
     * `node_modules/react-native-neura/ios/NeuraSDKManager/NeuraSDKManager.h`
 
 #### Android
-1. `npm i --save react-native-neura` OR `yarn add react-native-neura`
-2. `react-native link react-native-neura`
+1. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
+2. `react-native link react_native_sample_app`
 3. Connect Firebase (for push notifications)
     - open AndroidStudio
     - `Open an existing Android Studio project`
@@ -72,7 +72,7 @@ Methods:
 
 Example:
 ```
-    import Neura from 'react-native-neura'
+    import Neura from 'react_native_sample_app'
 
     ...
       try {
