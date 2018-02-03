@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.author        = { "chocky335" => "bogdan.pomogaibo@gmail.com" }
   s.license       = package["license"]
   s.homepage      = package["homepage"]
-  s.source        = { :git => "https://github.com/Stogniev/react-native-neura.git" }
+  s.source        = { :git => "https://github.com/NeuraLabs/react_native_sample_app.git" }
   s.source_files = "NeuraSDKManager/NeuraSDKManager.{h,m}"
   s.dependency      "NeuraSDKFramework", "~> 4.5"
 end
