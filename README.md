@@ -1,4 +1,4 @@
-# react-native-neura
+# react_native_sample_app
 
 A simple plugin that allows using Neura for React Native.
 
