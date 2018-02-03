@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.version       = package["version"]
   s.summary       = package["description"]
   s.requires_arc  = true
-  s.author        = { "chocky335" => "bogdan.pomogaibo@gmail.com" }
+  s.author        = { "youvalv" => "youval@theneura.com" }
   s.license       = package["license"]
   s.homepage      = package["homepage"]
   s.source        = { :git => "https://github.com/NeuraLabs/react_native_sample_app.git" }
