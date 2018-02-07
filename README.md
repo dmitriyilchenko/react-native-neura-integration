@@ -7,9 +7,7 @@ A simple plugin that allows using Neura for React Native.
 * react_native_sample_app >= 0.1.0 supports react-native >= 0.52.0 and react == 16.0.0
 
 ## Known issues
-
-I could not find how to make the import for iOS work properly since I'm using Cocoapods for Neura. If you have a suggestion that would be great.
-
+------
 ## Getting started
 
 Follow the instructions to install the SDK for
