@@ -12,11 +12,13 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.Arguments;
 
 import com.neura.standalonesdk.service.NeuraApiClient;
 import com.neura.standalonesdk.util.Builder;
 import com.neura.standalonesdk.util.SDKUtils;
 
+import com.neura.standalonesdk.events.NeuraEventCallBack;
 import com.neura.resources.authentication.AnonymousAuthenticateCallBack;
 import com.neura.resources.authentication.AnonymousAuthenticateData;
 import com.neura.sdk.object.AnonymousAuthenticationRequest;
@@ -112,5 +114,23 @@ public class NeuraSDKModule extends ReactContextBaseJavaModule {
         promise.reject(new Error());
       }
     });
+  }
+
+  @ReactMethod
+  public void notificationHandler(ReadableMap details) {
+    Bundle bundle = Arguments.toBundle(details);
+
+    boolean isNeuraPush = NeuraPushCommandFactory.getInstance().isNeuraPush(getApplicationContext(), bundle, new NeuraEventCallBack() {
+      @Override
+      public void neuraEventDetected(NeuraEvent event) {
+          Log.d("Neura event:", event);
+          promise.resolve(event);
+      }
+    });
+
+
+    if(!isNeuraPush) {
+      promise.reject(new Error("Neura event not found"));
+    }
   }
 }

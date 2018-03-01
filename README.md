@@ -57,6 +57,12 @@ Follow the instructions to install the SDK for
       compile "com.android.support:appcompat-v7:23.4.0"
       ...
 ```
+**4. Handling push notifications:
+- You should install [`react-native-fcm`](https://github.com/evollu/react-native-fcm)
+- Add handler of neura events:
+```
+  Neura.notificationHandler(notification.data)
+```
 ## Usage
 
 *** Android version have to be initialized (call `init` method) before using
@@ -67,6 +73,7 @@ Methods:
   * `isAuthenticated`: () => `Promise<boolean>`
   * `getUserAccessToken`: () => `Promise<?string>`
   * `getUserId`: () => `Promise<?string>`
+  * `notificationHandler`: (neuraNotificationData) => `Promise<neuraEvent | Error>`
 
 Example:
 ```
