@@ -10,7 +10,7 @@ A simple plugin that allows using Neura for React Native.
 ------
 ## Getting started
 
-Follow the instructions to install the SDK for
+Follow the instructions to create an app in:
   * [iOS](https://dev.theneura.com/tutorials/ios)
   * [Android](https://dev.theneura.com/tutorials/android)
 
@@ -19,17 +19,24 @@ Follow the instructions to install the SDK for
 
 ### - Manual install
 #### iOS
-1. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
-2. In Xcode: 
-  1. Create a new group NeuraRN inside Libraries catalog.
-  2. drag and drop into NeuraRN group:
+1. Download / clone this repo to your repo
+2. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
+3. In Xcode: 
+  1. Create a new group with the name of your app inside Libraries catalog.
+  2. drag and drop into with the name of your app group:
     * `node_modules/react_native_sample_app/ios/NeuraSDKManager/NeuraSDKManager.m`
     * `node_modules/react_native_sample_app/ios/NeuraSDKManager/NeuraSDKManager.h`
+4. `cd ios`
+5. follow the rest of the instructions in the iOS tutorial (pods etc.)
+
+
+
 
 #### Android
-1. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
-2. `react-native link react_native_sample_app`
-3. Connect Firebase (for push notifications)
+1. Download / clone this repo to your repo 
+2. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
+3. `react-native link react_native_sample_app`
+4. Connect Firebase (for push notifications)
     - open AndroidStudio
     - `Open an existing Android Studio project`
     - select ${projectRoot}/android
@@ -39,7 +46,7 @@ Follow the instructions to install the SDK for
     - Create new or select existed firebase project
     - Click `Add FCM to your app`
     - Accept Changes
-4. open file `android/app/build.gradle` and update dependencies:
+5. open file `android/app/build.gradle` and update dependencies:
 ```
   ...
   android {
@@ -57,7 +64,7 @@ Follow the instructions to install the SDK for
       compile "com.android.support:appcompat-v7:23.4.0"
       ...
 ```
-**4. Handling push notifications:
+6. Handling push notifications:
 - You should install [`react-native-fcm`](https://github.com/evollu/react-native-fcm)
 - Add handler of neura events:
 ```
@@ -65,7 +72,7 @@ Follow the instructions to install the SDK for
 ```
 ## Usage
 
-*** Android version have to be initialized (call `init` method) before using
+** Android version have to be initialized (call `init` method) before using
 
 Methods:
   * (Android only) `init`:({ appUid: string, secret: string }) => void
