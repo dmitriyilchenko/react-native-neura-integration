@@ -1,6 +1,6 @@
 # react_native_sample_app
 
-A simple plugin that allows using Neura for React Native.
+A simple plugin that demonstrate the usage of Neura in a React Native app.
 
 ## VERSIONS
 
@@ -10,33 +10,26 @@ A simple plugin that allows using Neura for React Native.
 ------
 ## Getting started
 
-Follow the instructions to create an app in:
+Follow these instructions to create a Neura app and get your app UID:
   * [iOS](https://dev.theneura.com/tutorials/ios)
   * [Android](https://dev.theneura.com/tutorials/android)
 
-### - Auto install
-  Comming soon...
-
-### - Manual install
+### - Install
+Download / clone the react_native_sample_app repositories to your app folder
 #### iOS
-1. Download / clone this repo to your repo
-2. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
-3. In Xcode: 
+1. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
+2. In Xcode: 
   1. Create a new group with the name of your app inside Libraries catalog.
   2. drag and drop into with the name of your app group:
-    * `node_modules/react_native_sample_app/ios/NeuraSDKManager/NeuraSDKManager.m`
-    * `node_modules/react_native_sample_app/ios/NeuraSDKManager/NeuraSDKManager.h`
-4. `cd ios`
-5. follow the rest of the instructions in the iOS tutorial (pods etc.)
-
-
-
+      * `node_modules/react_native_sample_app/ios/NeuraSDKManager/NeuraSDKManager.m`
+      * `node_modules/react_native_sample_app/ios/NeuraSDKManager/NeuraSDKManager.h`
+3. `cd ios` - So you can `pod install` Neura SDK
+4. Follow the rest of the instructions in the Neura iOS tutorial using the NeuraSDKManager
 
 #### Android
-1. Download / clone this repo to your repo 
-2. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
-3. `react-native link react_native_sample_app`
-4. Connect Firebase (for push notifications)
+1. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
+2. `react-native link react_native_sample_app`
+3. Connect Firebase (for push notifications)
     - open AndroidStudio
     - `Open an existing Android Studio project`
     - select ${projectRoot}/android
@@ -46,23 +39,35 @@ Follow the instructions to create an app in:
     - Create new or select existed firebase project
     - Click `Add FCM to your app`
     - Accept Changes
-5. open file `android/app/build.gradle` and update dependencies:
+4. open file `android/app/build.gradle` and update dependencies:
 ```
   ...
   android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         ...
-        targetSdkVersion 24
+        minSdkVersion 16
+        targetSdkVersion 26
         ...
     }
     ...
     dependencies {
       ...
-      compile "com.android.support:appcompat-v7:23.4.0"
+      implementation ("com.theneura:android-sdk:+") {
+        exclude group: "com.google.android.gms"
+        exclude group: "com.google.firebase"
+      }
+      implementation ("com.google.android.gms:play-services-gcm:15.0.1")
+      implementation ("com.google.android.gms:play-services-location:15.0.1")
+      implementation ("com.google.android.gms:play-services-awareness:15.0.1")
+      implementation ("com.google.firebase:firebase-messaging:17.1.0")
+      implementation ("com.google.firebase:firebase-core:16.0.1")
       ...
+    }
+    ...
+    apply plugin: 'com.google.gms.google-services'
 ```
 6. Handling push notifications:
 - You should install [`react-native-fcm`](https://github.com/evollu/react-native-fcm)
