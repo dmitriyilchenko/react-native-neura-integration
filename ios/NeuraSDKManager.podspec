@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.homepage      = package["homepage"]
   s.source        = { :git => "https://github.com/NeuraLabs/react_native_sample_app.git" }
   s.source_files = "NeuraSDKManager/NeuraSDKManager.{h,m}"
-  s.dependency      "NeuraSDKFramework", "~> 4.5"
+  s.dependency      "NeuraSDKFramework", "~> 4.10"
 end

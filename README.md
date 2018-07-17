@@ -1,6 +1,6 @@
 # react_native_sample_app
 
-A simple plugin that allows using Neura for React Native.
+A simple plugin that demonstrate the usage of Neura in a React Native app.
 
 ## VERSIONS
 
@@ -10,21 +10,21 @@ A simple plugin that allows using Neura for React Native.
 ------
 ## Getting started
 
-Follow the instructions to install the SDK for
+Follow these instructions to create a Neura app and get your app UID:
   * [iOS](https://dev.theneura.com/tutorials/ios)
   * [Android](https://dev.theneura.com/tutorials/android)
 
-### - Auto install
-  Comming soon...
-
-### - Manual install
+### - Install
+Download / clone the react_native_sample_app repositories to your app folder
 #### iOS
-1. `npm i --save react-native-neura` OR `yarn add react-native-neura`
+1. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
 2. In Xcode: 
-  1. Create a new group NeuraRN inside Libraries catalog.
-  2. drag and drop into NeuraRN group:
-    * `node_modules/react-native-neura/ios/NeuraSDKManager/NeuraSDKManager.m`
-    * `node_modules/react-native-neura/ios/NeuraSDKManager/NeuraSDKManager.h`
+  1. Create a new group with the name of your app inside Libraries catalog.
+  2. drag and drop into with the name of your app group:
+      * `node_modules/react_native_sample_app/ios/NeuraSDKManager/NeuraSDKManager.m`
+      * `node_modules/react_native_sample_app/ios/NeuraSDKManager/NeuraSDKManager.h`
+3. `cd ios` - So you can `pod install` Neura SDK
+4. Follow the rest of the instructions in the Neura iOS tutorial using the NeuraSDKManager
 
 #### Android
 1. `npm i --save react_native_sample_app` OR `yarn add react_native_sample_app`
@@ -43,21 +43,33 @@ Follow the instructions to install the SDK for
 ```
   ...
   android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         ...
-        targetSdkVersion 24
+        minSdkVersion 16
+        targetSdkVersion 26
         ...
     }
     ...
     dependencies {
       ...
-      compile "com.android.support:appcompat-v7:23.4.0"
+      implementation ("com.theneura:android-sdk:+") {
+        exclude group: "com.google.android.gms"
+        exclude group: "com.google.firebase"
+      }
+      implementation ("com.google.android.gms:play-services-gcm:15.0.1")
+      implementation ("com.google.android.gms:play-services-location:15.0.1")
+      implementation ("com.google.android.gms:play-services-awareness:15.0.1")
+      implementation ("com.google.firebase:firebase-messaging:17.1.0")
+      implementation ("com.google.firebase:firebase-core:16.0.1")
       ...
+    }
+    ...
+    apply plugin: 'com.google.gms.google-services'
 ```
-**4. Handling push notifications:
+6. Handling push notifications:
 - You should install [`react-native-fcm`](https://github.com/evollu/react-native-fcm)
 - Add handler of neura events:
 ```
@@ -65,7 +77,7 @@ Follow the instructions to install the SDK for
 ```
 ## Usage
 
-*** Android version have to be initialized (call `init` method) before using
+** Android version have to be initialized (call `init` method) before using
 
 Methods:
   * (Android only) `init`:({ appUid: string, secret: string }) => void
