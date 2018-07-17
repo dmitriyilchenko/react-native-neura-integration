@@ -353,7 +353,7 @@
 		40BEE8DF20EAD74A00AB290A /* NeuraSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeuraSDKManager.m; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
-		7EE3B47B3FFA455FAC559BC6 /* NeuraRN.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = NeuraRN.xcodeproj; path = ../node_modules/react_native_sample_app/ios/NeuraRN.xcodeproj; sourceTree = "<group>"; };
+		7EE3B47B3FFA455FAC559BC6 /* NeuraRN.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = NeuraRN.xcodeproj; path = ../node_modules/react-native-neura-sdk/ios/NeuraRN.xcodeproj; sourceTree = "<group>"; };
 		7FE3CF00908DE1466178CECE /* Pods-integrateneura.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-integrateneura.debug.xcconfig"; path = "Pods/Target Support Files/Pods-integrateneura/Pods-integrateneura.debug.xcconfig"; sourceTree = "<group>"; };
 		82F8053F1313BFE30DB3C639 /* Pods-integrateneura.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-integrateneura.release.xcconfig"; path = "Pods/Target Support Files/Pods-integrateneura/Pods-integrateneura.release.xcconfig"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -1299,8 +1299,8 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
 				);
 				INFOPLIST_FILE = integrateneuraTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1325,8 +1325,8 @@
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
 				);
 				INFOPLIST_FILE = integrateneuraTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1354,8 +1354,8 @@
 				DEVELOPMENT_TEAM = UF894MT86P;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
 				);
 				INFOPLIST_FILE = integrateneura/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1380,8 +1380,8 @@
 				DEVELOPMENT_TEAM = UF894MT86P;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
 				);
 				INFOPLIST_FILE = integrateneura/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1411,8 +1411,8 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
 				);
 				INFOPLIST_FILE = "integrateneura-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1446,8 +1446,8 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
 				);
 				INFOPLIST_FILE = "integrateneura-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1480,8 +1480,8 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
 				);
 				INFOPLIST_FILE = "integrateneura-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1514,8 +1514,8 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
-					"$(SRCROOT)/../node_modules/react_native_sample_app/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
+					"$(SRCROOT)/../node_modules/react-native-neura-sdk/ios/NeuraSDKManager",
 				);
 				INFOPLIST_FILE = "integrateneura-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

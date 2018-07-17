@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { element } from 'prop-types';
 import { View, Button, Text } from 'react-native';
-import Neura from 'react_native_sample_app';
+import Neura from 'react-native-neura-sdk';
 import { styles } from './index';
 
 class Container extends Component {
