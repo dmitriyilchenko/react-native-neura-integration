@@ -1,5 +1,5 @@
 {
-  "name": "react_native_sample_app",
+  "name": "react-native-neura-sdk",
   "version": "0.1.0",
   "private": false,
   "scripts": {
@@ -10,7 +10,7 @@
     "Youval Vaknin"
   ],
   "description": "Neura SDK support for React Native apps.",
-  "homepage": "https://github.com/NeuraLabs/react_native_sample_app",
+  "homepage": "https://github.com/NeuraLabs/react-native-neura-sdk",
   "license": "MIT",
   "keywords": [
     "react",
@@ -26,6 +26,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NeuraLabs/react_native_sample_app"
+    "url": "https://github.com/NeuraLabs/react-native-neura-sdk"
   }
 }
