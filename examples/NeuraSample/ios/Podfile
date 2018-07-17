@@ -1,0 +1,10 @@
+use_frameworks!
+platform :ios, '9.0'
+
+def basic_app_pods
+    pod 'NeuraSDKFramework', '~> 4.10.0'
+end
+
+target 'integrateneura' do
+    basic_app_pods
+end
