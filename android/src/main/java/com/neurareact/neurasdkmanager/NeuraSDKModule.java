@@ -54,66 +54,77 @@ public class NeuraSDKModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void init(ReadableMap config, Promise promise) {
-    appUid = config.getString("appUid");
-    appSecret = config.getString("appSecret");
+  public void init(String appUid, String appSecret, Promise promise) {
     Builder builder = new Builder(getReactApplicationContext());
-    mNeuraApiClient = builder.build();
-    mNeuraApiClient.setAppUid(appUid);
-    mNeuraApiClient.setAppSecret(appSecret);
+    mNeuraApiClient = NeuraApiClient.getClient(getReactApplicationContext(), appUid, appSecret);
     mNeuraApiClient.connect();
     promise.resolve("initialized");
   }
 
   @ReactMethod
   public void authenticate(final Promise promise) {
-    String pushToken = FirebaseInstanceId.getInstance().getToken();
 
-    AnonymousAuthenticationRequest request = new AnonymousAuthenticationRequest(pushToken);
+    if (mNeuraApiClient != null) {
+      String pushToken = FirebaseInstanceId.getInstance().getToken();
 
-    mNeuraApiClient.authenticate(request, new AnonymousAuthenticateCallBack() {
-      @Override
-      public void onSuccess(AnonymousAuthenticateData authenticateData) {
-        Log.i(getClass().getSimpleName(), "Successfully requested authentication with neura. ");
-        promise.resolve(authenticateData);
-      }
+      AnonymousAuthenticationRequest request = new AnonymousAuthenticationRequest(pushToken);
 
-      @Override
-      public void onFailure(int errorCode) {
-        Log.e(getClass().getSimpleName(), "Failed to authenticate with neura. "
-                      + "Reason : " + SDKUtils.errorCodeToString(errorCode));
-        promise.resolve(SDKUtils.errorCodeToString(errorCode));
-      }
-    });
+      mNeuraApiClient.authenticate(request, new AnonymousAuthenticateCallBack() {
+        @Override
+        public void onSuccess(AnonymousAuthenticateData authenticateData) {
+          Log.i(getClass().getSimpleName(), "Successfully requested authentication with neura. ");
+          promise.resolve(authenticateData);
+        }
+
+        @Override
+        public void onFailure(int errorCode) {
+          Log.e(getClass().getSimpleName(), "Failed to authenticate with neura. "
+                  + "Reason : " + SDKUtils.errorCodeToString(errorCode));
+          promise.resolve(SDKUtils.errorCodeToString(errorCode));
+        }
+      });
+    } else {
+      promise.reoslve("init() must be called first");
+    }
   }
 
   @ReactMethod
   public void isAuthenticated(Promise promise) {
-    Boolean isLoggedIn = mNeuraApiClient.isLoggedIn();
-
-    promise.resolve(isLoggedIn);
+    if (mNeuraApiClient != null) {
+      Boolean isLoggedIn = mNeuraApiClient.isLoggedIn();
+      promise.resolve(isLoggedIn);
+    } else {
+      promise.reoslve("init() must be called first");
+    }
   }
 
   @ReactMethod
   public void getUserAccessToken(Promise promise) {
-    String token = mNeuraApiClient.getUserAccessToken();
-
-    promise.resolve(token);
+    if (mNeuraApiClient != null) {
+      String token = mNeuraApiClient.getUserAccessToken();
+      promise.resolve(token);
+    } else {
+      promise.reoslve("init() must be called first");
+    }
   }
 
   @ReactMethod
   public void getUserId(final Promise promise) {
-    mNeuraApiClient.getUserDetails(new UserDetailsCallbacks() {
-      @Override
-      public void onSuccess(UserDetails userDetails) {
-        promise.resolve(userDetails);
-      }
+    if (mNeuraApiClient != null) {
+      mNeuraApiClient.getUserDetails(new UserDetailsCallbacks() {
+        @Override
+        public void onSuccess(UserDetails userDetails) {
+          promise.resolve(userDetails);
+        }
 
-      @Override
-      public void onFailure(Bundle resultData, int errorCode) {
-        promise.reject(new Error());
-      }
-    });
+        @Override
+        public void onFailure(Bundle resultData, int errorCode) {
+          promise.reject(new Error());
+        }
+      });
+    } else {
+      promise.reoslve("init() must be called first");
+    }
   }
 
   @ReactMethod
@@ -134,44 +145,64 @@ public class NeuraSDKModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void logOut(final Promise promise) {
-    mNeuraApiClient.forgetMe(new android.os.Handler.Callback() {
-      @Override
+    if (mNeuraApiClient != null) {
+      mNeuraApiClient.forgetMe(new android.os.Handler.Callback() {
+        @Override
         public boolean handleMessage(Message msg) {
-            if (msg.arg1 == 1) {
-              // check if forget me was successful using isLoggedIn
-              if (mNeuraApiClient.isLoggedIn()) {
-                promise.resolve(true);
-              } else {
-                promise.resolve (false);
-              }
+          if (msg.arg1 == 1) {
+            // check if forget me was successful using isLoggedIn
+            if (mNeuraApiClient.isLoggedIn()) {
+              promise.resolve(true);
+            } else {
+              promise.resolve(false);
             }
-            promise.resolve (false);
+          }
+          promise.resolve(false);
         }
-    });
+      });
+    } else {
+      promise.reoslve("init() must be called first");
+    }
   }
 
+  // follow https://dev.theneura.com/api-reference/situations-and-moments/ For possible events you can pass as event parameter.
   @ReactMethod
-  public void simulateEvent(final Promise promise) {
-    mNeuraApiClient.simulateEvent("userStartedDriving", new SimulateEventCallback() {
-      @Override
-      public void onSuccess(String eventName) {
-        Log.i(eventName, "Successfully simulated the event");
-        promise.resolve(true);
-      }
+  public void simulateEvent(String event, final Promise promise) {
+    if (mNeuraApiClient != null) {
+      mNeuraApiClient.simulateEvent(eventName, new SimulateEventCallback() {
+        @Override
+        public void onSuccess(String eventName) {
+          Log.i(getClass().getSimpleName(), "Successfully simulated the event: " + eventName);
+          promise.resolve(true);
+        }
 
-      @Override
-      public void onFailure(String eventName, String message) {
-        Log.e(getClass().getSimpleName(), "Failed to simulate the event. "
-                      + "Reason : " + message);
-        promise.resolve(message);
-      }
-    });
+        @Override
+        public void onFailure(String eventName, String message) {
+          Log.e(getClass().getSimpleName(), "Failed to simulate the event: " + eventName
+                  + ", Reason : " + message);
+          promise.resolve(message);
+        }
+      });
+    } else {
+      promise.reoslve("init() must be called first");
+    }
   }
 
   // follow https://dev.theneura.com/pages/how-to-use-engagement-api/ for details on how to utilize the Insights API
   @ReactMethod
-  public void tagEngagementAttempt(final Promise promise) {
-    int result = NeuraEngagements.tagEngagementAttempt(getApplicationContext(), "Feature Name", null, null);
+  public void tagEngagementAttempt(String featureName, String instanceId, String value, final Promise promise) {
+    int result = NeuraEngagements.tagEngagementAttempt(getApplicationContext(), featureName, instanceId, value);
+    if (result == SUCCESS) {
+      promise.resolve(true);
+    } else {
+      promise.reject(new Error(result));
+    }
+  }
+
+  // follow https://dev.theneura.com/pages/how-to-use-engagement-api/ for details on how to utilize the Insights API
+  @ReactMethod
+  public void tagEngagementFeature(String featureName, String instanceId, String action, String value, final Promise promise) {
+    int result = NeuraEngagements.tagEngagementFeature(getApplicationContext(), featureName, instanceId, action, value);
     if (result == SUCCESS) {
       promise.resolve(true);
     } else {
@@ -180,12 +211,40 @@ public class NeuraSDKModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void tagEngagementFeature(final Promise promise) {
-    int result = NeuraEngagements.tagEngagementFeature(getApplicationContext(), "Feature Name", null, EngagementAction.SUCCESS, null);
-    if (result == SUCCESS) {
-      promise.resolve(true);
+  public void addWebHookSubscription(String event, String eventIdentifier, String webhookId, final Promise promise) {
+    if (mNeuraApiClient != null) {
+      mNeuraApiClient.subscribeToEvent(event, eventIdentifier, SubscriptionMethod.WEBHOOK, webhookId, new SubscriptionRequestCallbacks() {
+        @Override
+        public void onSuccess(String eventName, Bundle resultData, String identifier) {
+          promise.resolve(true);
+        }
+
+        @Override
+        public void onFailure(String eventName, Bundle resultData, int errorCode) {
+          promise.reject(new Error(errorCode));
+        }
+      });
     } else {
-      promise.reject(new Error(result));
+      promise.reoslve("init() must be called first");
+    }
+  }
+
+  @ReactMethod
+  public void addPushSubscription(String event, String eventIdentifier, final Promise promise) {
+    if (mNeuraApiClient != null) {
+      mNeuraApiClient.subscribeToEvent(event, eventIdentifier, new SubscriptionRequestCallbacks() {
+        @Override
+        public void onSuccess(String eventName, Bundle resultData, String identifier) {
+          promise.resolve(true);
+        }
+
+        @Override
+        public void onFailure(String eventName, Bundle resultData, int errorCode) {
+          promise.reject(new Error(errorCode));
+        }
+      });
+    } else {
+      promise.reoslve("init() must be called first");
     }
   }
 }
