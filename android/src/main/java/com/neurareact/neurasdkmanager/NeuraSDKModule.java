@@ -116,76 +116,76 @@ public class NeuraSDKModule extends ReactContextBaseJavaModule {
     });
   }
 
-  @ReactMethod
-  public void notificationHandler(ReadableMap details) {
-    Bundle bundle = Arguments.toBundle(details);
+  // @ReactMethod
+  // public void notificationHandler(ReadableMap details) {
+  //   Bundle bundle = Arguments.toBundle(details);
 
-    boolean isNeuraPush = NeuraPushCommandFactory.getInstance().isNeuraPush(getApplicationContext(), bundle, new NeuraEventCallBack() {
-      @Override
-      public void neuraEventDetected(NeuraEvent event) {
-          Log.d("Neura event:", event);
-          promise.resolve(event);
-      }
-    });
-    if(!isNeuraPush) {
-      promise.reject(new Error("Neura event not found"));
-    }
-  }
+  //   boolean isNeuraPush = NeuraPushCommandFactory.getInstance().isNeuraPush(getApplicationContext(), bundle, new NeuraEventCallBack() {
+  //     @Override
+  //     public void neuraEventDetected(NeuraEvent event) {
+  //         Log.d("Neura event:", event);
+  //         promise.resolve(event);
+  //     }
+  //   });
+  //   if(!isNeuraPush) {
+  //     promise.reject(new Error("Neura event not found"));
+  //   }
+  // }
 
-  @ReactMethod
-  public void logOut(final Promise promise) {
-    mNeuraApiClient.forgetMe(new android.os.Handler.Callback() {
-      @Override
-        public boolean handleMessage(Message msg) {
-            if (msg.arg1 == 1) {
-              // check if forget me was successful using isLoggedIn
-              if (mNeuraApiClient.isLoggedIn()) {
-                promise.resolve(true);
-              } else {
-                promise.resolve (false);
-              }
-            }
-            promise.resolve (false);
-        }
-    });
-  }
+  // @ReactMethod
+  // public void logOut(final Promise promise) {
+  //   mNeuraApiClient.forgetMe(new android.os.Handler.Callback() {
+  //     @Override
+  //       public boolean handleMessage(Message msg) {
+  //           if (msg.arg1 == 1) {
+  //             // check if forget me was successful using isLoggedIn
+  //             if (mNeuraApiClient.isLoggedIn()) {
+  //               promise.resolve(true);
+  //             } else {
+  //               promise.resolve (false);
+  //             }
+  //           }
+  //           promise.resolve (false);
+  //       }
+  //   });
+  // }
 
-  @ReactMethod
-  public void simulateEvent(final Promise promise) {
-    mNeuraApiClient.simulateEvent("userStartedDriving", new SimulateEventCallback() {
-      @Override
-      public void onSuccess(String eventName) {
-        Log.i(eventName, "Successfully simulated the event");
-        promise.resolve(true);
-      }
+  // @ReactMethod
+  // public void simulateEvent(final Promise promise) {
+  //   mNeuraApiClient.simulateEvent("userStartedDriving", new SimulateEventCallback() {
+  //     @Override
+  //     public void onSuccess(String eventName) {
+  //       Log.i(eventName, "Successfully simulated the event");
+  //       promise.resolve(true);
+  //     }
 
-      @Override
-      public void onFailure(String eventName, String message) {
-        Log.e(getClass().getSimpleName(), "Failed to simulate the event. "
-                      + "Reason : " + message);
-        promise.resolve(message);
-      }
-    });
-  }
+  //     @Override
+  //     public void onFailure(String eventName, String message) {
+  //       Log.e(getClass().getSimpleName(), "Failed to simulate the event. "
+  //                     + "Reason : " + message);
+  //       promise.resolve(message);
+  //     }
+  //   });
+  // }
 
-  // follow https://dev.theneura.com/pages/how-to-use-engagement-api/ for details on how to utilize the Insights API
-  @ReactMethod
-  public void tagEngagementAttempt(final Promise promise) {
-    int result = NeuraEngagements.tagEngagementAttempt(getApplicationContext(), "Feature Name", null, null);
-    if (result == SUCCESS) {
-      promise.resolve(true);
-    } else {
-      promise.reject(new Error(result));
-    }
-  }
+  // // follow https://dev.theneura.com/pages/how-to-use-engagement-api/ for details on how to utilize the Insights API
+  // @ReactMethod
+  // public void tagEngagementAttempt(final Promise promise) {
+  //   int result = NeuraEngagements.tagEngagementAttempt(getApplicationContext(), "Feature Name", null, null);
+  //   if (result == SUCCESS) {
+  //     promise.resolve(true);
+  //   } else {
+  //     promise.reject(new Error(result));
+  //   }
+  // }
 
-  @ReactMethod
-  public void tagEngagementFeature(final Promise promise) {
-    int result = NeuraEngagements.tagEngagementFeature(getApplicationContext(), "Feature Name", null, EngagementAction.SUCCESS, null);
-    if (result == SUCCESS) {
-      promise.resolve(true);
-    } else {
-      promise.reject(new Error(result));
-    }
-  }
+  // @ReactMethod
+  // public void tagEngagementFeature(final Promise promise) {
+  //   int result = NeuraEngagements.tagEngagementFeature(getApplicationContext(), "Feature Name", null, EngagementAction.SUCCESS, null);
+  //   if (result == SUCCESS) {
+  //     promise.resolve(true);
+  //   } else {
+  //     promise.reject(new Error(result));
+  //   }
+  // }
 }
