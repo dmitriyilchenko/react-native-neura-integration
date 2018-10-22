@@ -1,108 +1,48 @@
-# react-native-neura-sdk
 
-A simple plugin that demonstrate the usage of Neura in a React Native app.
+# react-native-neura-integration
 
-## VERSIONS
-
-* react-native-neura-sdk >= 0.1.0 supports react-native >= 0.52.0 and react == 16.0.0
-
-## Known issues
-------
 ## Getting started
-
-Follow these instructions to create a Neura app and get your app UID:
+Follow the instructions to install the SDK for
   * [iOS](https://dev.theneura.com/tutorials/ios)
   * [Android](https://dev.theneura.com/tutorials/android)
 
-### - Install
-Download / clone the react-native-neura-sdk repository to your app folder
+`$ npm install bitbucket:dayzz/react-native-neura-integration --save`
+
+### Mostly automatic installation
+`$ react-native link react-native-neura-integration`
+
+### Manual installation
+
+
 #### iOS
-1. `npm i --save react-native-neura-sdk` OR `yarn add react-native-neura-sdk`
-2. In Xcode: 
-  1. Create a new group with the name of your app inside Libraries catalog.
-  2. drag and drop into with the name of your app group:
-      * `node_modules/react-native-neura-sdk/ios/NeuraSDKManager/NeuraSDKManager.m`
-      * `node_modules/react-native-neura-sdk/ios/NeuraSDKManager/NeuraSDKManager.h`
-3. `cd ios` - So you can `pod install` Neura SDK
-4. Follow the rest of the instructions in the Neura iOS tutorial using the NeuraSDKManager
+
+1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
+2. Go to `node_modules` ➜ `react-native-neura-integration` and add `RNNeuraIntegration.xcodeproj`
+3. In XCode, in the project navigator, select your project. Add `libRNNeuraIntegration.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+4. Run your project (`Cmd+R`)<
 
 #### Android
-1. `npm i --save react-native-neura-sdk` OR `yarn add react-native-neura-sdk`
-2. `react-native link react-native-neura-sdk`
-3. Connect Firebase (for push notifications)
-    - open AndroidStudio
-    - `Open an existing Android Studio project`
-    - select ${projectRoot}/android
-    - Click `Tools > Firebase` to open the `Assistant window`
-    - Click `Cloud messaging`
-    - Click `Connect to Firebase`
-    - Create new or select existed firebase project
-    - Click `Add FCM to your app`
-    - Accept Changes
-4. open file `android/app/build.gradle` and update dependencies:
-```
-  ...
-  android {
-    compileSdkVersion 26
-    buildToolsVersion '27.0.3'
 
-    defaultConfig {
-        ...
-        minSdkVersion 16
-        targetSdkVersion 26
-        ...
-    }
-    ...
-    dependencies {
-      ...
-      implementation ("com.theneura:android-sdk:+") {
-        exclude group: "com.google.android.gms"
-        exclude group: "com.google.firebase"
-      }
-      implementation ("com.google.android.gms:play-services-gcm:15.0.1")
-      implementation ("com.google.android.gms:play-services-location:15.0.1")
-      implementation ("com.google.android.gms:play-services-awareness:15.0.1")
-      implementation ("com.google.firebase:firebase-messaging:17.1.0")
-      implementation ("com.google.firebase:firebase-core:16.0.1")
-      ...
-    }
-    ...
-    apply plugin: 'com.google.gms.google-services'
-```
-6. Handling push notifications:
-- You should install [`react-native-fcm`](https://github.com/evollu/react-native-fcm)
-- Add handler of neura events:
-```
-  Neura.notificationHandler(notification.data)
-```
+1. Open up `android/app/src/main/java/[...]/MainActivity.java`
+  - Add `import com.dayzzpublic.neuraintegration.RNNeuraIntegrationPackage;` to the imports at the top of the file
+  - Add `new RNNeuraIntegrationPackage()` to the list returned by the `getPackages()` method
+2. Append the following lines to `android/settings.gradle`:
+  	```
+  	include ':react-native-neura-integration'
+  	project(':react-native-neura-integration').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-neura-integration/android')
+  	```
+3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+  	```
+      compile project(':react-native-neura-integration')
+  	```
+
+
 ## Usage
+```javascript
+import RNNeuraIntegration from 'react-native-neura-integration';
 
-** Android version have to be initialized (call `init` method) before using
-
-Methods:
-  * (Android only) `init`:({ appUid: string, secret: string }) => void
-  * `authenticate`:() => `Promise<string | Error>`
-  * `isAuthenticated`: () => `Promise<boolean>`
-  * `getUserAccessToken`: () => `Promise<?string>`
-  * `getUserId`: () => `Promise<?string>`
-  * `notificationHandler`: (neuraNotificationData) => `Promise<neuraEvent | Error>`
-
-Example:
+// TODO: What to do with the module?
+RNNeuraIntegration;
 ```
-    import Neura from 'react-native-neura-sdk'
 
-    ...
-      try {
-        //Just for android
-        Neura.init()
 
-        const isAuth = await Neura.isAuthenticated()
-
-        if (!isAuth) {
-          const token = await Neura.authenticate()
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    ...
-```

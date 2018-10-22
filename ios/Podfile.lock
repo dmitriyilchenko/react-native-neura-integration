@@ -1,0 +1,12 @@
+PODS:
+  - NeuraSDKFramework (4.9.1)
+
+DEPENDENCIES:
+  - NeuraSDKFramework (~> 4.5)
+
+SPEC CHECKSUMS:
+  NeuraSDKFramework: 65cae642eed971a80c6db8fb88fc7501e5e44d81
+
+PODFILE CHECKSUM: 5e046ab84443a5f173bcde3c9cc07ab3f505accd
+
+COCOAPODS: 1.4.0

@@ -1,3 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.neurareact.neurasdkmanager" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dayzzpublic.neuraintegration">
+    <uses-permission android:name="android.permisssion.ACCESS_FINE_LOCATION"></uses-permission>
 </manifest>
+  

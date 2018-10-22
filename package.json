@@ -1,31 +1,22 @@
 {
-  "name": "react-native-neura-sdk",
-  "version": "0.1.0",
-  "private": false,
+  "name": "react-native-neura-integration",
+  "version": "1.0.0",
+  "description": "React native neura sdk integration",
+  "main": "index.js",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "contributors": [
-    "Youval Vaknin"
-  ],
-  "description": "Neura SDK support for React Native apps.",
-  "homepage": "https://github.com/NeuraLabs/react-native-neura-sdk",
-  "license": "MIT",
   "keywords": [
-    "react",
-    "react-native",
-    "react-component",
-    "ios",
-    "android",
-    "neura",
-    "core"
+    "react-native"
   ],
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "",
   "peerDependencies": {
-    "react-native": "0.52.0"
+    "react-native": "^0.55.3"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/NeuraLabs/react-native-neura-sdk"
+    "type": "ssh",
+    "url": "git@bitbucket.org/dayzz/react-native-neura-integration.git"
   }
 }

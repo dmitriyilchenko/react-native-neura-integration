@@ -1,0 +1,6 @@
+framework module Pods_RNNeuraIntegration {
+  umbrella header "Pods-RNNeuraIntegration-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,5 +1,6 @@
+
 import { NativeModules } from 'react-native';
 
-const Neura = NativeModules.NeuraSDKManager;
+const { RNNeuraIntegration } = NativeModules;
 
-export default Neura;
+export default RNNeuraIntegration;
