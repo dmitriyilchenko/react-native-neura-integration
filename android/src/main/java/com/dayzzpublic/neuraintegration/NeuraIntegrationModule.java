@@ -118,6 +118,14 @@ public class NeuraIntegrationModule extends ReactContextBaseJavaModule {
       Log.i(getClass().getSimpleName(), "Attempted log in");
     }
   }
+  
+  @ReactMethod
+  public void init(ReadableMap config) {
+    appUid = config.getString("appUid");
+    appSecret = config.getString("appSecret");
+    NeuraApiClient mNeuraApiClient = NeuraApiClient.getClient(mReactApplicationContext.getApplicationContext(), appUid, appSecret);
+    NeuraIntegrationSingleton.getInstance().setNeuraApiClient(mNeuraApiClient);
+  }
 
   @ReactMethod
   public void isAuthenticated(Promise promise) {
